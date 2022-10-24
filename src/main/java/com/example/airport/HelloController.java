@@ -32,8 +32,4 @@ public class HelloController {
     protected void btnClick1(ActionEvent event) throws IOException {
         HelloApplication.menuAdministrator();
     }
-//    @FXML
-//    protected void btnchoice1(ActionEvent event) throws IOException {
-//        HelloApplication.menuAdministrator1();
-//    }
 }
