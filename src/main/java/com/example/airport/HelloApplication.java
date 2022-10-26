@@ -23,7 +23,7 @@ public class HelloApplication extends Application {
         stage.setTitle("Airport");
         stage.setScene(scene);
         stage1 = new Stage();
-        stage1.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
         stage1.setResizable(false);
         stage1.initOwner(stage);
         stage.show();
@@ -37,6 +37,7 @@ public class HelloApplication extends Application {
         root.setCenter(fxmlLoader1.load());
         Scene scene = new Scene(root);
         stage1.setScene(scene);
+        stage1.initModality(Modality.APPLICATION_MODAL);
         stage1.show();
     }
     public static void menuAdministrator() throws IOException {
@@ -49,6 +50,7 @@ public class HelloApplication extends Application {
         root.setCenter(fxmlLoader1.load());
         Scene scene = new Scene(root);
         stage1.setScene(scene);
+        stage1.initModality(Modality.APPLICATION_MODAL);
         stage1.show();
     }
 
