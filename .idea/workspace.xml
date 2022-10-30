@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44cbf95e-9322-4c0d-8220-d977e01c79d8" name="Changes" comment="&#10;Исправлены неточности&#10;&#10;Код оптимизирован">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Plane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/sqlcode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/sqlcode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/airport/1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/1.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/airport/3.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/3.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/airport/4.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/4.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="44cbf95e-9322-4c0d-8220-d977e01c79d8" name="Changes" comment="Программа стала в одно окно" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -143,7 +132,21 @@
       <option name="project" value="LOCAL" />
       <updated>1666796115100</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Программа стала в одно окно">
+      <created>1667118614217</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667118614217</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Программа стала в одно окно">
+      <created>1667118630326</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667118630326</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -173,7 +176,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Добавлены меню администратора&#10;Исправлены неточности" />
     <MESSAGE value="&#10;Исправлены неточности&#10;&#10;Код оптимизирован" />
-    <option name="LAST_COMMIT_MESSAGE" value="&#10;Исправлены неточности&#10;&#10;Код оптимизирован" />
+    <MESSAGE value="Программа стала в одно окно" />
+    <option name="LAST_COMMIT_MESSAGE" value="Программа стала в одно окно" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
