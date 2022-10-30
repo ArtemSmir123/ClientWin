@@ -1,5 +1,6 @@
 package com.example.airport;
 
+import com.example.airport.objects.Plane;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -7,7 +8,6 @@ import java.sql.*;
 import java.util.*;
 
 public class sqlcode {
-    static Scanner input = new Scanner(System.in);
     static Connection connection;
     static Statement stmt;
     private static void connect(){
@@ -51,7 +51,7 @@ public class sqlcode {
         ObservableList<Plane> result = FXCollections.observableArrayList();
         try {
             s = stmt.executeQuery("SELECT * FROM public.\"Planes\"" );
-            s.next();
+         //   s.next();
             connection.close();
             List<Plane> planes = new ArrayList<>();
             while (s.next()) {

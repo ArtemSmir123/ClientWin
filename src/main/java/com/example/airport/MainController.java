@@ -1,4 +1,5 @@
 package com.example.airport;
+import com.example.airport.objects.Plane;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,15 +7,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.io.IOException;
-
-import static com.example.airport.HelloApplication.stage1;
+import static com.example.airport.MainApp.stage;
 import static com.example.airport.sqlcode.*;
-
-public class HelloController {
+public class MainController {
     @FXML
     private Button btn;
-    @FXML
-    private Button b1;
     @FXML
     private TextField ffa;
     @FXML
@@ -38,17 +35,17 @@ public class HelloController {
     @FXML
     private TableColumn<Plane, Integer> k3;
 
-    public HelloController() {
+    public MainController() {
     }
 
     @FXML
     protected void btnClick(ActionEvent event) throws IOException {
-        HelloApplication.menuPassenger();
+        MainApp.menuPassenger();
     }
     @FXML
     protected void closeProgram(ActionEvent event) {
-        stage1.close();
-        stage1 = new Stage();
+        stage.close();
+        stage = new Stage();
     } // кнопка закрыть
     @FXML
     protected void login(ActionEvent event) throws IOException {
@@ -57,8 +54,10 @@ public class HelloController {
         k = findUser(ffa.getText(), ffa1.getText());
         ffa1.setText("");
         ffa.setText("");
-     //   if (k == 1) HelloApplication.menuModerator();
-        if (k == 0) HelloApplication.menuAdministrator();
+     //   if (k == 1) MainApp.menuModerator();
+        if (k == 0) {
+            MainApp.menuAdministrator();
+        }
         if (k == -1) exep2.setText("Введены неправильные логин или пароль");
     } // ввод логина пароля
     @FXML
@@ -86,6 +85,5 @@ public class HelloController {
         k1.setCellValueFactory(new PropertyValueFactory<Plane, String>("model"));
         k2.setCellValueFactory(new PropertyValueFactory<Plane, String>("fullTitle"));
         k3.setCellValueFactory(new PropertyValueFactory<Plane, Integer>("numberOfSeats"));
-
     } //табличка с самолетами
 }
