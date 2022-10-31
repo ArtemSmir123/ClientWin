@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.airport.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.airport.MenuAdministrator.MenuAdministratorController">
    <children>
       <TabPane layoutX="59.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -36,19 +36,23 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Удалить самолет">
+            <Tab text="Редактирование самолетов">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="table1" layoutX="41.0" layoutY="70.0" onMouseClicked="#tableView" onSort="#tableView" prefHeight="271.0" prefWidth="519.0">
+                        <TableView fx:id="table1" layoutX="143.0" layoutY="14.0" onMouseClicked="#tableView" onSort="#tableView" prefHeight="183.0" prefWidth="314.0">
                           <columns>
-                            <TableColumn fx:id="k1" prefWidth="75.0" text="Модель" />
-                            <TableColumn fx:id="k2" prefWidth="112.0" text="Полное название" />
-                              <TableColumn fx:id="k3" prefWidth="111.0" text="Количество мест" />
-                              <TableColumn prefWidth="129.0" text="Редактировать" />
-                              <TableColumn minWidth="4.0" prefWidth="88.0" text="Удалить" />
+                            <TableColumn fx:id="k1" prefWidth="60.0" text="Модель" />
+                            <TableColumn fx:id="k2" prefWidth="147.0" text="Полное название" />
+                              <TableColumn fx:id="k3" prefWidth="106.0" text="Количество мест" />
                           </columns>
                         </TableView>
+                        <Button fx:id="bb2" layoutX="211.0" layoutY="287.0" mnemonicParsing="false" text="Сохранить редактирование" />
+                        <Button fx:id="bb3" layoutX="424.0" layoutY="287.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" text="Удалить" />
+                        <Button fx:id="bb1" layoutX="61.0" layoutY="287.0" mnemonicParsing="false" onAction="#bb1Click" text="Очистить поля" />
+                        <TextField fx:id="tx1" layoutX="33.0" layoutY="227.0" promptText="Модель" />
+                        <TextField fx:id="tx2" layoutX="220.0" layoutY="228.0" promptText="Полное наименование" />
+                        <TextField fx:id="tx3" layoutX="404.0" layoutY="228.0" promptText="Количество мест" />
                      </children>
                   </AnchorPane>
               </content>

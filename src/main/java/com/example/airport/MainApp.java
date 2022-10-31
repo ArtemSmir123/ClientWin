@@ -36,7 +36,7 @@ public class MainApp extends Application {
     public static void menuAdministrator() throws IOException {
         stage.setTitle("Панель управления администратора");
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("3.fxml"));
-        FXMLLoader fxmlLoader1 = new FXMLLoader(MainApp.class.getResource("4.fxml"));
+        FXMLLoader fxmlLoader1 = new FXMLLoader(MainApp.class.getResource("MenuAdministrator/4.fxml"));
 
         BorderPane root = new BorderPane();
         root.setTop(fxmlLoader.load());
