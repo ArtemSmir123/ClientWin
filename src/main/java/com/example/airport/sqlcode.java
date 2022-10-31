@@ -14,18 +14,6 @@ public class sqlcode {
             System.out.println("Подключение не удалось");
         }
     } // коннект
-    public static boolean savePlane(String plane1, String plane2, int plane3) {
-        connect();
-        int v = 0;
-        try {
-            v = stmt.executeUpdate("INSERT INTO public.\"Planes\" (model,fullTitle, numberOfSeats)\n" +
-                    "VALUES ('" + plane1 + "', '" + plane2 + "', " + plane3 + ")");
-            connection.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return v == 1;
-    } // сохранить самолет
     protected static int findUser(String login, String pass){
         connect();
         ResultSet s;

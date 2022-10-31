@@ -19,9 +19,7 @@ public class sqlcodeAdmistrator extends sqlcode {
         ObservableList<Plane> result = FXCollections.observableArrayList();
         try {
             s = stmt.executeQuery("SELECT * FROM public.\"Planes\"" );
-            //   s.next();
             connection.close();
-            List<Plane> planes = new ArrayList<>();
             while (s.next()) {
                 result.add(new Plane(s.getInt(1), s.getString("model"), s.getString("fullTitle"), s.getInt("numberOfSeats")));
             }
@@ -42,4 +40,16 @@ public class sqlcodeAdmistrator extends sqlcode {
         }
         return true;
     } // найти самолет
+    public static boolean savePlane(String plane1, String plane2, int plane3) {
+        connect();
+        int v = 0;
+        try {
+            v = stmt.executeUpdate("INSERT INTO public.\"Planes\" (model,fullTitle, numberOfSeats)\n" +
+                    "VALUES ('" + plane1 + "', '" + plane2 + "', " + plane3 + ")");
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return v == 1;
+    } // сохранить самолет
 }

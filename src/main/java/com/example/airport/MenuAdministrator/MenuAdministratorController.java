@@ -1,7 +1,6 @@
 package com.example.airport.MenuAdministrator;
 
 import com.example.airport.objects.Plane;
-import com.example.airport.sqlcode;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,7 +63,7 @@ public class MenuAdministratorController {
         boolean findStatus = ssa.findPlane(plane1.getText());
         if (findStatus) {
             try {
-                saveStatus = sqlcode.savePlane(plane1.getText(), plane2.getText(), Integer.parseInt(plane3.getText()));
+                saveStatus = sqlcodeAdmistrator.savePlane(plane1.getText(), plane2.getText(), Integer.parseInt(plane3.getText()));
                 exep1.setText("сохранено");
             } catch (NumberFormatException exception) {
                 exep1.setText("пробуем еще");
