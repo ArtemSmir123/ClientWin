@@ -9,8 +9,8 @@ public class MainApp extends Application {
     static Stage stage;
     static Stage stage1;
     @Override
-    public void start(Stage stage) throws IOException {
-        this.stage = stage;
+    public void start(Stage stag) throws IOException {
+        stage = stag;
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("1.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Airport");
