@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44cbf95e-9322-4c0d-8220-d977e01c79d8" name="Changes" comment="" />
+    <list default="true" id="44cbf95e-9322-4c0d-8220-d977e01c79d8" name="Changes" comment="Обновления в интеграции с SQL">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/MenuAdministratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/MenuAdministratorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/sqlcodeAdmistrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/sqlcodeAdmistrator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/sqlcode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/sqlcode.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -258,7 +262,8 @@
     <MESSAGE value="&#10;Исправлены неточности&#10;&#10;Код оптимизирован" />
     <MESSAGE value="Программа стала в одно окно" />
     <MESSAGE value="Меню администратора переехало в соотвествующую папку" />
-    <option name="LAST_COMMIT_MESSAGE" value="Меню администратора переехало в соотвествующую папку" />
+    <MESSAGE value="Обновления в интеграции с SQL" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновления в интеграции с SQL" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
