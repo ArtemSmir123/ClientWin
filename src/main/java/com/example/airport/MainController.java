@@ -1,4 +1,7 @@
 package com.example.airport;
+import com.example.airport.objects.Admin;
+import com.example.airport.objects.Moder;
+import com.example.airport.objects.Users;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,7 +19,7 @@ public class MainController {
     @FXML
     private Label exep2;
 
-
+    static Users user;
 
     public MainController() {
     }
@@ -27,22 +30,21 @@ public class MainController {
     @FXML
     protected void closeProgram(ActionEvent event) throws IOException {
         stage.close();
+        user = null;
         stage = new Stage();
         MainApp k = new MainApp();
+
         k.start(stage);
     } // кнопка закрыть
     @FXML
     protected void login(ActionEvent event) throws IOException {
-        int k = -1;
         exep2.setText("");
-        k = findUser(ffa.getText(), ffa1.getText());
+        user = findUser(ffa.getText(), ffa1.getText());
         ffa1.setText("");
         ffa.setText("");
-     //   if (k == 1) MainApp.menuModerator();
-        if (k == 0) {
-            MainApp.menuAdministrator();
-        }
-        if (k == -1) exep2.setText("Введены неправильные логин или пароль");
+        if (user instanceof Moder) MainApp.menuModerator();
+        if (user instanceof Admin) MainApp.menuAdministrator();
+        if (user == null) exep2.setText("Введены неправильные логин или пароль");
     } // ввод логина пароля
 
 

@@ -30,20 +30,29 @@ public class MainApp extends Application {
         root.setCenter(fxmlLoader1.load());
         Scene scene = new Scene(root);
         stage.setScene(scene);
-//        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
     public static void menuAdministrator() throws IOException {
         stage.setTitle("Панель управления администратора");
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("3.fxml"));
-        FXMLLoader fxmlLoader1 = new FXMLLoader(MainApp.class.getResource("MenuAdministrator/4.fxml"));
+        FXMLLoader fxmlLoader1 = new FXMLLoader(MainApp.class.getResource("MenuAdministrator/Admin.fxml"));
 
         BorderPane root = new BorderPane();
         root.setTop(fxmlLoader.load());
         root.setCenter(fxmlLoader1.load());
         Scene scene = new Scene(root);
         stage.setScene(scene);
- //       stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+    }
+    public static void menuModerator() throws IOException {
+        stage.setTitle("Панель управления модератора");
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("3.fxml"));
+        FXMLLoader fxmlLoader1 = new FXMLLoader(MainApp.class.getResource("MenuModerator/Moder.fxml"));
+        BorderPane root = new BorderPane();
+        root.setTop(fxmlLoader.load());
+        root.setCenter(fxmlLoader1.load());
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
         stage.show();
     }
     public static void main(String[] args) {

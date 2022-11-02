@@ -1,6 +1,9 @@
 package com.example.airport.MenuAdministrator;
 
 import com.example.airport.objects.Plane;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,6 +46,7 @@ public class MenuAdministratorController {
     private TextField plane2;
     @FXML
     private TextField plane3;
+
     @FXML
     protected void bb1Click(){
         tx1.setText("");
@@ -56,6 +60,21 @@ public class MenuAdministratorController {
         k1.setCellValueFactory(new PropertyValueFactory<Plane, String>("model"));
         k2.setCellValueFactory(new PropertyValueFactory<Plane, String>("fullTitle"));
         k3.setCellValueFactory(new PropertyValueFactory<Plane, Integer>("numberOfSeats"));
+
+        TableView.TableViewSelectionModel<Plane> selectionModel = table1.getSelectionModel();
+        selectionModel.selectedItemProperty().addListener(new ChangeListener<Plane>(){
+
+            @Override
+
+                public void changed (ObservableValue < ? extends Plane > observableValue, Plane plane, Plane t1){
+                try {
+                    tx1.setText(observableValue.getValue().getModel());
+                    tx2.setText(observableValue.getValue().getFullTitle());
+                    tx3.setText(String.valueOf(observableValue.getValue().getNumberOfSeats()));
+                } catch (NullPointerException w){
+                }
+            }
+        });
     } //табличка с самолетами
     @FXML
     protected void saveBtn1(ActionEvent event){
@@ -75,5 +94,14 @@ public class MenuAdministratorController {
             exep1.setText("Такой объект уже есть");
         }
     } // сохранить самолет
+
+    @FXML
+    protected void modelPlane(){
+        TableView.TableViewSelectionModel<Plane> selectionModel = table1.getSelectionModel();
+        ReadOnlyObjectProperty<Plane> plane = selectionModel.selectedItemProperty();
+
+
+
+    }
 
 }

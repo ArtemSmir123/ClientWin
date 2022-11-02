@@ -1,4 +1,8 @@
 package com.example.airport;
+import com.example.airport.objects.Admin;
+import com.example.airport.objects.Moder;
+import com.example.airport.objects.Users;
+
 import java.sql.*;
 public class sqlcode {
     protected static Connection connection;
@@ -14,18 +18,20 @@ public class sqlcode {
             System.out.println("Подключение не удалось");
         }
     } // коннект
-    protected static int findUser(String login, String pass){
+    protected static Users findUser(String login, String pass){
         connect();
         ResultSet s;
             try {
-                s = stmt.executeQuery("SELECT role FROM public.\"Users\" WHERE login = '" + login + "' AND password = '" + pass + "'");
+                s = stmt.executeQuery("SELECT * FROM public.\"Users\" WHERE login = '" + login + "' AND password = '" + pass + "'");
                 s.next();
                 connection.close();
-                if (s.getString(1).equals("moder")) return 1;
-                else if (s.getString(1).equals("admin")) return 0;
-                else return -1;
+                if (s.getString("role").equals("moder"))
+                    return new Moder(s.getString("login"), s.getString("password"), s.getString("role"), s.getString("name"), s.getString("lastname"));
+                else if (s.getString("role").equals("admin"))
+                    return new Admin(s.getString("login"), s.getString("password"), s.getString("role"), s.getString("name"), s.getString("lastname"));
+                else return null;
             } catch (SQLException ex){
-                return -1;
+                return null;
             }
     } // найти пользователя для login
 

@@ -31,4 +31,13 @@ public class Plane {
         return new SimpleStringProperty(model);
     }
 
+    public String getModel() {
+        return model;
+    }
+    public Integer getNumberOfSeats() {
+        return numberOfSeats;
+    }
+    public String getFullTitle() {
+        return fullTitle;
+    }
 }

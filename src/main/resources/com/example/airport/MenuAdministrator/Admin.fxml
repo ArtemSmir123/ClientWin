@@ -50,7 +50,7 @@
                         <Button fx:id="bb2" layoutX="211.0" layoutY="287.0" mnemonicParsing="false" text="Сохранить редактирование" />
                         <Button fx:id="bb3" layoutX="424.0" layoutY="287.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" text="Удалить" />
                         <Button fx:id="bb1" layoutX="61.0" layoutY="287.0" mnemonicParsing="false" onAction="#bb1Click" text="Очистить поля" />
-                        <TextField fx:id="tx1" layoutX="33.0" layoutY="227.0" promptText="Модель" />
+                        <TextField fx:id="tx1" layoutX="33.0" layoutY="227.0" onMouseClicked="#modelPlane" promptText="Модель" />
                         <TextField fx:id="tx2" layoutX="220.0" layoutY="228.0" promptText="Полное наименование" />
                         <TextField fx:id="tx3" layoutX="404.0" layoutY="228.0" promptText="Количество мест" />
                      </children>
