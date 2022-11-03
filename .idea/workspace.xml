@@ -4,19 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44cbf95e-9322-4c0d-8220-d977e01c79d8" name="Changes" comment="Обновления в интеграции с SQL">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Admin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Moder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Users.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/4.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuModerator/Moder.fxml" afterDir="false" />
+    <list default="true" id="44cbf95e-9322-4c0d-8220-d977e01c79d8" name="Changes" comment="Доработан интерфейс пользователя в меню Администратора&#10;Добавлены новые функции&#10;Созданы заготовки на следующие реализации">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MainApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/MenuAdministratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/MenuAdministratorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/sqlcodeAdmistrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/sqlcodeAdmistrator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Plane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Users.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/sqlcode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/sqlcode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuAdministrator/4.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuAdministrator/Admin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuAdministrator/Admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuAdministrator/Admin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/objects/TestPlane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/objects/TestPlane.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +68,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -78,6 +78,12 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.airport" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="ава" />
+      <command value="TestPlane" />
+    </option>
   </component>
   <component name="RunManager" selected="Application.MainApp">
     <configuration name="адл" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -223,7 +229,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667228877787</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Усовершенствован механизм идентификации&#10;Созданы классы и подклассы Users.java">
+      <created>1667411657297</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1667411657297</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -291,7 +304,9 @@
     <MESSAGE value="Программа стала в одно окно" />
     <MESSAGE value="Меню администратора переехало в соотвествующую папку" />
     <MESSAGE value="Обновления в интеграции с SQL" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновления в интеграции с SQL" />
+    <MESSAGE value="Усовершенствован механизм идентификации&#10;Созданы классы и подклассы Users.java" />
+    <MESSAGE value="Доработан интерфейс пользователя в меню Администратора&#10;Добавлены новые функции&#10;Созданы заготовки на следующие реализации" />
+    <option name="LAST_COMMIT_MESSAGE" value="Доработан интерфейс пользователя в меню Администратора&#10;Добавлены новые функции&#10;Созданы заготовки на следующие реализации" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -300,15 +315,6 @@
           <properties class="java.lang.IllegalAccessException" package="java.lang" />
           <option name="timeStamp" value="25" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/MenuAdministratorController.java</url>
-          <line>68</line>
-          <properties method="changed">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

@@ -16,7 +16,7 @@ public class Plane {
     }
     @Override
     public String toString() {
-        return id_plane.toString() + model.toString()  + fullTitle.toString()  + numberOfSeats.toString() ;
+        return " " + id_plane.toString() + " " + model.toString() + " " + fullTitle.toString() + " " + numberOfSeats.toString() ;
     }
     public IntegerProperty id_planeProperty(){
         return new SimpleIntegerProperty(id_plane);
@@ -39,5 +39,8 @@ public class Plane {
     }
     public String getFullTitle() {
         return fullTitle;
+    }
+    public Integer getId_plane() {
+        return id_plane;
     }
 }

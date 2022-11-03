@@ -2,6 +2,7 @@ module com.example.airport {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires org.jetbrains.annotations;
 
 
     opens com.example.airport to javafx.fxml;

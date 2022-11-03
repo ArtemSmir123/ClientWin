@@ -19,7 +19,7 @@ public class MainController {
     @FXML
     private Label exep2;
 
-    static Users user;
+    private static Users user;
 
     public MainController() {
     }
@@ -43,7 +43,7 @@ public class MainController {
         ffa1.setText("");
         ffa.setText("");
         if (user instanceof Moder) MainApp.menuModerator();
-        if (user instanceof Admin) MainApp.menuAdministrator();
+        if (user instanceof Admin) MainApp.menuAdministrator((Admin)user);
         if (user == null) exep2.setText("Введены неправильные логин или пароль");
     } // ввод логина пароля
 

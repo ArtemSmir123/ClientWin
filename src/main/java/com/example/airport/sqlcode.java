@@ -18,13 +18,21 @@ public class sqlcode {
             System.out.println("Подключение не удалось");
         }
     } // коннект
+    protected static void disconnect(){
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    } // коннект
+
     protected static Users findUser(String login, String pass){
         connect();
         ResultSet s;
             try {
                 s = stmt.executeQuery("SELECT * FROM public.\"Users\" WHERE login = '" + login + "' AND password = '" + pass + "'");
                 s.next();
-                connection.close();
+                disconnect();
                 if (s.getString("role").equals("moder"))
                     return new Moder(s.getString("login"), s.getString("password"), s.getString("role"), s.getString("name"), s.getString("lastname"));
                 else if (s.getString("role").equals("admin"))
@@ -34,5 +42,22 @@ public class sqlcode {
                 return null;
             }
     } // найти пользователя для login
+
+    protected static boolean findLogin(int login){
+        connect();
+        ResultSet s;
+        try {
+            s = stmt.executeQuery("SELECT login FROM public.\"Users\" WHERE login = '" + String.valueOf(login)+ "'");
+            s.next();
+
+            if (s.getFetchSize() == 1) return true;
+            else {
+                return false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 }
