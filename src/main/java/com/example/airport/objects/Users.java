@@ -30,7 +30,7 @@ public abstract class Users {
     }
     @Override
     public String toString(){
-        return "Логин:" + this.login + ", имя: " + this.name + ", фамилия: " + this.lastname;
+        return "Логин:" + this.login + ", \nимя: " + this.name + ", фамилия: " + this.lastname;
     }
 }
 

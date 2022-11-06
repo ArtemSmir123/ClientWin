@@ -26,7 +26,7 @@
                               <TextField fx:id="plane3" promptText="Количество мест в самолете" />
                            </children>
                         </VBox>
-                        <Button layoutX="82.0" layoutY="143.0" mnemonicParsing="false" onAction="#saveBtn1" text="Сохранить" />
+                        <Button layoutX="81.0" layoutY="143.0" mnemonicParsing="false" onAction="#saveBtn1" text="Сохранить" />
                         <Label fx:id="exep1" layoutX="16.0" layoutY="184.0" prefHeight="50.0" prefWidth="200.0" textFill="RED" />
                         <Label layoutX="22.0" layoutY="14.0" text="Добавить самолет">
                            <font>
@@ -46,7 +46,7 @@
                         </VBox>
                         <Button layoutX="428.0" layoutY="143.0" mnemonicParsing="false" onAction="#saveBtn2" text="Сохранить" />
                         <Label fx:id="exep2" layoutX="368.0" layoutY="184.0" prefHeight="50.0" prefWidth="200.0" />
-                        <Label fx:id="label1" layoutX="62.0" layoutY="209.0" onMouseClicked="#nor" prefHeight="119.0" prefWidth="477.0" />
+                        <Label fx:id="label1" layoutX="62.0" layoutY="209.0" onContextMenuRequested="#nor" onMouseClicked="#nor" prefHeight="119.0" prefWidth="477.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -62,9 +62,9 @@
                               <TableColumn fx:id="k3" prefWidth="123.0" text="Количество мест" />
                           </columns>
                         </TableView>
-                        <Button fx:id="bb2" layoutX="211.0" layoutY="252.0" mnemonicParsing="false" onAction="#bb2Click" text="Сохранить редактирование" />
-                        <Button fx:id="bb3" layoutX="430.0" layoutY="252.0" mnemonicParsing="false" onAction="#bb3Click" prefHeight="26.0" prefWidth="103.0" text="Удалить" />
-                        <Button fx:id="bb1" layoutX="67.0" layoutY="252.0" mnemonicParsing="false" onAction="#textClean1" text="Очистить поля" />
+                        <Button layoutX="211.0" layoutY="252.0" mnemonicParsing="false" onAction="#bb2Click" text="Сохранить редактирование" />
+                        <Button layoutX="430.0" layoutY="252.0" mnemonicParsing="false" onAction="#bb3Click" prefHeight="26.0" prefWidth="103.0" text="Удалить" />
+                        <Button layoutX="67.0" layoutY="252.0" mnemonicParsing="false" onAction="#textClean1" text="Очистить поля" />
                         <TextField fx:id="tx1" layoutX="33.0" layoutY="209.0" promptText="Модель" />
                         <TextField fx:id="tx2" layoutX="220.0" layoutY="210.0" promptText="Полное наименование" />
                         <TextField fx:id="tx3" layoutX="404.0" layoutY="210.0" promptText="Количество мест" />
@@ -79,22 +79,22 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="280.0" layoutY="65.0" prefHeight="282.0" prefWidth="293.0">
+                        <TableView fx:id="table3" layoutX="280.0" layoutY="65.0" onMouseClicked="#tableview2" onSort="#tableview2" prefHeight="282.0" prefWidth="293.0">
                           <columns>
-                            <TableColumn prefWidth="94.0" text="login" />
-                              <TableColumn prefWidth="110.0" text="Фамилия" />
-                            <TableColumn prefWidth="69.0" text="Имя" />
+                            <TableColumn fx:id="k4" prefWidth="94.0" text="login" />
+                              <TableColumn fx:id="k5" prefWidth="110.0" text="Фамилия" />
+                            <TableColumn fx:id="k6" prefWidth="69.0" text="Имя" />
                           </columns>
                         </TableView>
-                        <Button layoutX="21.0" layoutY="92.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="120.0" text="Редактировать " />
+                        <Button layoutX="21.0" layoutY="92.0" mnemonicParsing="false" onAction="#editModer" prefHeight="26.0" prefWidth="120.0" text="Редактировать " />
                         <Button layoutX="21.0" layoutY="127.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="120.0" text="Удалить" />
-                        <Label layoutX="21.0" layoutY="22.0" prefHeight="49.0" prefWidth="230.0" text="Модератор не выбран" />
+                        <Label fx:id="lab4" layoutX="21.0" layoutY="22.0" prefHeight="49.0" prefWidth="230.0" text="Модератор не выбран" />
                         <TextField layoutX="352.0" layoutY="23.0" prefHeight="26.0" prefWidth="149.0" />
                         <Button layoutX="501.0" layoutY="23.0" mnemonicParsing="false" text="Очистить" />
                         <Button layoutX="280.0" layoutY="23.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="Найти" />
-                        <Label alignment="TOP_LEFT" layoutX="21.0" layoutY="292.0" prefHeight="55.0" prefWidth="230.0" text="Статусы операций" />
-                        <TextField layoutX="21.0" layoutY="184.0" promptText="Имя" />
-                        <TextField layoutX="21.0" layoutY="217.0" promptText="Фамилия" />
+                        <Label fx:id="lab3" alignment="TOP_LEFT" layoutX="21.0" layoutY="292.0" prefHeight="55.0" prefWidth="230.0" text="Статусы операций" />
+                        <TextField fx:id="tx4" layoutX="21.0" layoutY="184.0" promptText="Имя" />
+                        <TextField fx:id="tx5" layoutX="21.0" layoutY="217.0" promptText="Фамилия" />
                      </children>
                   </AnchorPane>
               </content>

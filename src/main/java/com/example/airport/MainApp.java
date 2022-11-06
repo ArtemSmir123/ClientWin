@@ -55,7 +55,8 @@ public class MainApp extends Application {
         stage.show();
     }
     private static void translate(Users user){
-        MenuAdministratorController.setUser(user);
+        MenuAdministratorController m = new MenuAdministratorController();
+        m.setUser(user);
         MainApp.user = null;
     }
     public static void menuModerator() throws IOException {

@@ -6,17 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="44cbf95e-9322-4c0d-8220-d977e01c79d8" name="Changes" comment="Доработан интерфейс пользователя в меню Администратора&#10;Добавлены новые функции&#10;Созданы заготовки на следующие реализации">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/MenuAdministratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/MenuAdministratorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/sqlcodeAdmistrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/sqlcodeAdmistrator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Plane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Admin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/sqlcode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/sqlcode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuAdministrator/Admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuAdministrator/Admin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/objects/TestPlane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/objects/TestPlane.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,20 +52,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/artemsmirnov/Documents/Наработки/Airport&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "/Users/artemsmirnov/Documents/Наработки/Airport",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "editor.preferences.gutterIcons"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuAdministrator" />
@@ -145,8 +140,8 @@
         <item itemvalue="Application.MainApp" />
         <item itemvalue="JUnit.TestPlane" />
         <item itemvalue="Application.адл" />
-        <item itemvalue="Application.адл" />
         <item itemvalue="Application.MainApp" />
+        <item itemvalue="JUnit.TestPlane" />
       </list>
     </recent_temporary>
   </component>

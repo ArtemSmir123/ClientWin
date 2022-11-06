@@ -1,4 +1,5 @@
 package com.example.airport.MenuAdministrator;
+import com.example.airport.objects.Admin;
 import com.example.airport.objects.Moder;
 import com.example.airport.objects.Plane;
 import com.example.airport.objects.Users;
@@ -15,68 +16,80 @@ public class MenuAdministratorController {
     }
     sqlcodeAdmistrator ssa = new sqlcodeAdmistrator();
     private static Plane pl;
-    private static int idPP;
-    private static Users user;
+//    private static int idPP;
+  //  private static String idModer = new String("");
+    private static Admin us;
 
-    public static void setUser(Users user) {
-        MenuAdministratorController.user = user;
-    }
+    private static Moder user;
 
     @FXML
-    private Button bb1;
+    private TextField tx1; // Редактирование самолетов
     @FXML
-    private Button bb2;
+    private TextField tx2; // Редактирование самолетов
     @FXML
-    private Button bb3;
+    private TextField tx3; // Редактирование самолетов
     @FXML
-    private TextField tx1;
+    private TableView<Plane> table1; // Редактирование самолетов
     @FXML
-    private TextField tx2;
+    private TableColumn<Plane, String> k1; // Редактирование самолетов
     @FXML
-    private TextField tx3;
+    private TableColumn<Plane, String> k2; // Редактирование самолетов
     @FXML
-    private TableView<Plane> table1;
+    private TableColumn<Plane, Integer> k3; // Редактирование самолетов
     @FXML
-    private TableColumn<Plane, String> k1;
+    private Label lab1; // Редактирование самолетов
     @FXML
-    private TableColumn<Plane, String> k2;
+    private Label lab2; // Редактирование самолетов
     @FXML
-    private TableColumn<Plane, Integer> k3;
+    private Label exep1; // Добавить самолет
     @FXML
-    private Label exep1;
+    private TextField plane1; // Добавить самолет
     @FXML
-    private Label exep2;
+    private TextField plane2; // Добавить самолет
     @FXML
-    private TextField plane1;
-    @FXML
-    private TextField plane2;
-    @FXML
-    private TextField plane3;
+    private TextField plane3; // Добавить самолет
     @FXML
     private Button updateBtn;
     @FXML
-    private Label lab1;
+    private Label exep2; // Добавить модератора
     @FXML
-    private Label lab2;
+    private TextField mod1; // Добавить модератора
     @FXML
-    private TextField mod1;
+    private TextField mod2; // Добавить модератора
     @FXML
-    private TextField mod2;
+    private Label label1; // Добавление
     @FXML
-    private Label label1;
-
+    private TableView<Moder> table3;
+    @FXML
+    private TableColumn<Moder, String> k4;
+    @FXML
+    private TableColumn<Moder, String> k5;
+    @FXML
+    private TableColumn<Moder, String> k6;
+    @FXML
+    private TextField tx4;
+    @FXML
+    private TextField tx5;
+    @FXML
+    private Label lab3;
+    @FXML
+    private Label lab4;
+    public void setUser(Users us) {
+        MenuAdministratorController.us = (Admin) us;
+    }
     @FXML
     protected void textClean1(){
         tx1.setText("");
         tx2.setText("");
         tx3.setText("");
-        idPP = 0;
+        //idPP = 0;
+        pl = null;
         tableView();
     } // нажатие кнопки очистить поля
 
     @FXML
     protected void bb2Click(){
-        if (idPP == 0) {
+        if (pl == null) {
             lab2.setText("Объект не выбран");
             tableView();
         } else if (tx1.getText().equals("") || tx2.getText().equals("") || tx3.getText().equals("")) {
@@ -86,21 +99,21 @@ public class MenuAdministratorController {
             lab2.setText("Объект содержит некорректные значения, количество мест в самолете должно быть цифрой");
         }
         else {
-            pl = new Plane(idPP, tx1.getText(), tx2.getText(), Integer.parseInt(tx3.getText()));
+            pl = new Plane(pl.getId_plane(), tx1.getText(), tx2.getText(), Integer.parseInt(tx3.getText()));
             boolean result = sqlcodeAdmistrator.updatePlane(pl);
 
             if (result) lab2.setText("Объект обновлен");
             else lab2.setText("Объект не обновлен");
             textClean1();
         }
-    } // нажатие кнопки редактировать
+    } // нажатие кнопки редактировать самолет
     @FXML
     protected void bb3Click(){
-        boolean result = sqlcodeAdmistrator.deletePlane(idPP);
+        boolean result = sqlcodeAdmistrator.deletePlane(pl.getId_plane());
         if (result) lab2.setText("Объект удален");
         else lab2.setText("Объект не удален");
         textClean1();
-    } // нажатие кнопки удалить
+    } // нажатие кнопки удалить самолет
     @FXML
     protected void tableView(){
         ObservableList<Plane> forTable = ssa.findPlanes();
@@ -117,7 +130,8 @@ public class MenuAdministratorController {
                         tx1.setText(observableValue.getValue().getModel());
                         tx2.setText(observableValue.getValue().getFullTitle());
                         tx3.setText(String.valueOf(observableValue.getValue().getNumberOfSeats()));
-                        idPP = observableValue.getValue().getId_plane();
+                    //    idPP = observableValue.getValue().getId_plane();
+                        pl = observableValue.getValue();
                         sel();
                     }
                     catch (NullPointerException ignored){
@@ -126,7 +140,7 @@ public class MenuAdministratorController {
                 }
         });
         sel();
-    } //табличка с самолетами
+    } // Табличка самолетов
     @FXML
     protected void saveBtn1(ActionEvent event){
         boolean saveStatus = false;
@@ -165,11 +179,57 @@ public class MenuAdministratorController {
         }
     } // проверка на число
     private void sel(){
-        if(idPP == 0) lab1.setText("Объект не выбран");
-        else lab1.setText("Выбран объект:" + sqlcodeAdmistrator.findPlane(idPP).toString());
+        if(pl == null) lab1.setText("Объект не выбран");
+        else lab1.setText("Выбран объект:" + pl.toString());
     } // отражалка выбранного объекта
     @FXML
     public void nor(){
-        label1.setText(user.toString());
-    }
+        label1.setText(us.toString());
+    } // запись о администрации
+    @FXML
+    public void tableview2(){
+        ObservableList<Moder> forTable = ssa.findModers();
+        table3.setItems(forTable);
+        k4.setCellValueFactory(new PropertyValueFactory<Moder, String>("login"));
+        k5.setCellValueFactory(new PropertyValueFactory<Moder, String>("lastname"));
+        k6.setCellValueFactory(new PropertyValueFactory<Moder, String>("name"));
+        TableView.TableViewSelectionModel<Moder> selectionModel = table3.getSelectionModel();
+        selectionModel.selectedItemProperty().addListener(new ChangeListener<Moder>(){
+            @Override
+            public void changed (ObservableValue < ? extends Moder > observableValue, Moder moder, Moder t1){
+                try {
+                    tx4.setText(observableValue.getValue().getName());
+                    tx5.setText(observableValue.getValue().getLastname());
+                  //  idModer = observableValue.getValue().getLogin();
+                    user = observableValue.getValue();
+                    sel2();
+                }
+                catch (NullPointerException ignored){
+                }
+
+            }
+        });
+        sel2();
+    } // Таблица модераторов
+    private void sel2(){
+        if(user == null) lab4.setText("Объект не выбран");
+        else lab4.setText("Выбран объект:\n" + user.toString());
+    } // Отражалка выбранного объекта
+    @FXML
+    private void editModer() {
+        if (user == null) lab3.setText("Оператор не выбран \nвыберите оператора");
+        else if (user.getName().equals(tx4.getText()) && user.getLastname().equals(tx5.getText()))
+            lab3.setText("Вы не изменили данные\nоператора");
+        else {
+            if(sqlcodeAdmistrator.editModerQuery(user, tx4.getText(), tx5.getText())) lab3.setText("Данные изменены");
+            else lab3.setText("Данные не изменены");
+            textClean2();
+        }
+    } // Редактировать модератора
+    protected void textClean2(){
+        tx4.setText("");
+        tx5.setText("");
+        user = null;
+        tableview2();
+    } // нажатие кнопки очистить поля
 }

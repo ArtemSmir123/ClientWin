@@ -1,6 +1,7 @@
 package com.example.airport.MenuAdministrator;
 import com.example.airport.objects.Moder;
 import com.example.airport.objects.Plane;
+import com.example.airport.objects.Users;
 import com.example.airport.sqlcode;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,25 +39,25 @@ public class sqlcodeAdmistrator extends sqlcode {
         }
         return false;
     } // найти самолет, если нашли то true
-    protected static Plane findPlane(Integer id){
-        connect();
-        ResultSet s;
-        Plane plane = null;
-        try {
-            s = sqlcode.stmt.executeQuery("SELECT * FROM public.\"Planes\" WHERE id_planes = '" + id + "'");
-            s.next();
-            disconnect();
-            String mod = s.getString("model");
-            String tit = s.getString("fulltitle");
-            Integer i = s.getInt("numberofseats");
-
-            plane = new Plane(id, s.getString("model"), s.getString("fulltitle"), s.getInt("numberofseats"));
-        } catch (SQLException ex){
-            System.out.println();
-            ex.printStackTrace();
-        }
-        return plane;
-    } // найти самолет и вернуть объект самолет
+//    protected static Plane findPlane(Integer id){
+//        connect();
+//        ResultSet s;
+//        Plane plane = null;
+//        try {
+//            s = sqlcode.stmt.executeQuery("SELECT * FROM public.\"Planes\" WHERE id_planes = '" + id + "'");
+//            s.next();
+//            disconnect();
+//            String mod = s.getString("model");
+//            String tit = s.getString("fulltitle");
+//            Integer i = s.getInt("numberofseats");
+//
+//            plane = new Plane(id, s.getString("model"), s.getString("fulltitle"), s.getInt("numberofseats"));
+//        } catch (SQLException ex){
+//            System.out.println();
+//            ex.printStackTrace();
+//        }
+//        return plane;
+//    } // найти самолет и вернуть объект самолет
     protected static boolean deletePlane(Integer id){
         connect();
         int v = 0;
@@ -93,7 +94,7 @@ public class sqlcodeAdmistrator extends sqlcode {
 
     protected static boolean findLogin(int login){
         return sqlcode.findLogin(login);
-    }
+    } // проверка по логину
     protected boolean saveModer(Moder moder){
         connect();
         int v = 0;
@@ -104,5 +105,47 @@ public class sqlcodeAdmistrator extends sqlcode {
             throw new RuntimeException(e);
         }
         return v == 1;
+    } // сохранение модератора
+    protected ObservableList<Moder> findModers(){
+        connect();
+        ResultSet s;
+        ObservableList<Moder> result = FXCollections.observableArrayList();
+        try {
+            s = stmt.executeQuery("SELECT * FROM public.\"Users\" WHERE role = 'moder'" );
+            connection.close();
+            while (s.next()) {
+                result.add(new Moder(s.getString("login"), s.getString("password"), s.getString("role"), s.getString("name"), s.getString("lastname")));
+            }
+        } catch (SQLException e) {
+        }
+        return result;
+    } // ищем модеров для выгрузки\
+
+    protected static boolean editModerQuery(Moder user, String name, String lastname) {
+        connect();
+        int v = 0;
+        try {
+            v = stmt.executeUpdate("UPDATE public.\"Users\"" + " SET name = '" + name + "', lastname = '" + lastname + "' WHERE login = '" + user.getLogin() + "'");
+            disconnect();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return v == 1;
     }
+
+
+//    protected static Moder findModer(String idModer){
+//        connect();
+//        ResultSet s;
+//        Moder result;
+//        try {
+//            s = stmt.executeQuery("SELECT * FROM public.\"Users\" WHERE login = '" + idModer + "'" );
+//            connection.close();
+//            s.next();
+//            result = new Moder(s.getString("login"), s.getString("password"), s.getString("role"), s.getString("name"), s.getString("lastname"));
+//            return result;
+//        } catch (SQLException e) {
+//            return null;
+//        }
+//    } // ищем модера для отображения
 }
