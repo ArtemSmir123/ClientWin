@@ -12,7 +12,8 @@
           <Menu mnemonicParsing="false" text="Помощь" />
           <Menu mnemonicParsing="false" text="Выйти">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#closeProgram" text="Выйти" />
+                  <MenuItem mnemonicParsing="false" onAction="#closeProfile" text="Выйти из профиля" />
+                  <MenuItem mnemonicParsing="false" onAction="#closeProgram" text="Выйти из программы" />
                </items></Menu>
         </menus>
       </MenuBar>

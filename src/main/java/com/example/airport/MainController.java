@@ -8,43 +8,44 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import static com.example.airport.MainApp.stage;
+import static com.example.airport.MainApp.stage1;
 import static com.example.airport.sqlcode.*;
 public class MainController {
     @FXML
-    private Button btn;
+    private TextField loginField; // поле логина
     @FXML
-    private TextField ffa;
+    private PasswordField passwordField; // поле пароля
     @FXML
-    private PasswordField ffa1;
-    @FXML
-    private Label exep2;
-
+    private Label exeptionLabel;
     private static Users user;
-
     public MainController() {
     }
     @FXML
-    protected void btnClick(ActionEvent event) throws IOException {
+    protected void passengerButtonClick(ActionEvent event) throws IOException {
         MainApp.menuPassenger();
     }
     @FXML
-    protected void closeProgram(ActionEvent event) throws IOException {
+    protected void closeProfile(ActionEvent event) throws IOException {
         stage.close();
         user = null;
         stage = new Stage();
+        stage1 = new Stage();
         MainApp k = new MainApp();
-
         k.start(stage);
-    } // кнопка закрыть
+    } // кнопка закрыть профиль
+    @FXML
+    protected void closeProgram(ActionEvent event) throws IOException {
+        System.exit(0);
+    } // кнопка закрыть программу
     @FXML
     protected void login(ActionEvent event) throws IOException {
-        exep2.setText("");
-        user = findUser(ffa.getText(), ffa1.getText());
-        ffa1.setText("");
-        ffa.setText("");
+        exeptionLabel.setText("");
+        user = findUser(loginField.getText(), passwordField.getText());
+        loginField.setText("");
+        passwordField.setText("");
         if (user instanceof Moder) MainApp.menuModerator();
         if (user instanceof Admin) MainApp.menuAdministrator((Admin)user);
-        if (user == null) exep2.setText("Введены неправильные логин или пароль");
+        if (user == null) exeptionLabel.setText("Введены неправильные логин или пароль");
     } // ввод логина пароля
 
 

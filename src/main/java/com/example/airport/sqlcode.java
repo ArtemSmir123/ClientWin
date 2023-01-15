@@ -1,7 +1,10 @@
 package com.example.airport;
 import com.example.airport.objects.Admin;
 import com.example.airport.objects.Moder;
+import com.example.airport.objects.Plane;
 import com.example.airport.objects.Users;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 public class sqlcode {
@@ -57,7 +60,20 @@ public class sqlcode {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
+    protected ObservableList<Plane> findPlanes(){
+        connect();
+        ResultSet s;
+        ObservableList<Plane> result = FXCollections.observableArrayList();
+        try {
+            s = stmt.executeQuery("SELECT * FROM public.\"Planes\"" );
+            connection.close();
+            while (s.next()) {
+                result.add(new Plane(s.getInt(1), s.getString("model"), s.getString("fullTitle"), s.getInt("numberOfSeats")));
+            }
+        } catch (SQLException e) {
+        }
+        return result;
+    } // ищем самолеты для выгрузки
 
 }

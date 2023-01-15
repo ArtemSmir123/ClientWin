@@ -15,7 +15,7 @@ import java.io.IOException;
 public class MainApp extends Application {
     static Stage stage;
     static Stage stage1;
-    static Users user;
+    public static Users user;
     @Override
     public void start(Stage stag) throws IOException {
         stage = stag;
@@ -28,37 +28,13 @@ public class MainApp extends Application {
         stage1.setResizable(false);
         stage1.initOwner(stage);
         stage.show();
-    }
-
-    public static void menuPassenger() throws IOException {
-        stage.setTitle("Регистрация на рейс");
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("3.fxml"));
-        FXMLLoader fxmlLoader1 = new FXMLLoader(MainApp.class.getResource("2.fxml"));
-        BorderPane root = new BorderPane();
-        root.setTop(fxmlLoader.load());
-        root.setCenter(fxmlLoader1.load());
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-    public static void menuAdministrator(Admin admin) throws IOException {
-        stage.setTitle("Панель управления администратора");
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("3.fxml"));
-        FXMLLoader fxmlLoader1 = new FXMLLoader(MainApp.class.getResource("MenuAdministrator/Admin.fxml"));
-        BorderPane root = new BorderPane();
-        root.setTop(fxmlLoader.load());
-        root.setCenter(fxmlLoader1.load());
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        user = admin;
-        translate(user);
-        stage.show();
-    }
-    private static void translate(Users user){
+    } // загрузка главного меню
+    private static void translate(Object user){
         MenuAdministratorController m = new MenuAdministratorController();
-        m.setUser(user);
+        m.setUser((Users) user);
+        //m.nor();
         MainApp.user = null;
-    }
+    } // трансляция пользователя в подсистему
     public static void menuModerator() throws IOException {
         stage.setTitle("Панель управления модератора");
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("3.fxml"));
@@ -69,7 +45,31 @@ public class MainApp extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
+    } // загрузка панели модератора
+    public static void menuAdministrator(Admin admin) throws IOException {
+        stage.setTitle("Панель управления администратора");
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("3.fxml"));
+        FXMLLoader fxmlLoader1 = new FXMLLoader(MainApp.class.getResource("MenuAdministrator/Admin.fxml"));
+        BorderPane root = new BorderPane();
+        root.setTop(fxmlLoader.load());
+        root.setCenter(fxmlLoader1.load());
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        // user = admin;
+        translate(admin);
+        stage.show();
+    } // загрузка панели администратора
+    public static void menuPassenger() throws IOException {
+        stage.setTitle("Регистрация на рейс");
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("3.fxml"));
+        FXMLLoader fxmlLoader1 = new FXMLLoader(MainApp.class.getResource("2.fxml"));
+        BorderPane root = new BorderPane();
+        root.setTop(fxmlLoader.load());
+        root.setCenter(fxmlLoader1.load());
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    } // загрузка меню пассажира
     public static void main(String[] args) {
         launch();
     }

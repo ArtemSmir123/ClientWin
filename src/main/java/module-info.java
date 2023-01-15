@@ -10,5 +10,7 @@ module com.example.airport {
     opens com.example.airport.objects to javafx.fxml;
     exports com.example.airport.MenuAdministrator;
     opens com.example.airport.MenuAdministrator to javafx.fxml;
+    exports com.example.airport.MenuModerator;
+    opens com.example.airport.MenuModerator to javafx.fxml;
     exports com.example.airport;
 }

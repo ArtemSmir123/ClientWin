@@ -12,21 +12,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class sqlcodeAdmistrator extends sqlcode {
+class sqlcodeAdmistrator extends sqlcode {
+
+    @Override
     protected ObservableList<Plane> findPlanes(){
-        connect();
-        ResultSet s;
-        ObservableList<Plane> result = FXCollections.observableArrayList();
-        try {
-            s = stmt.executeQuery("SELECT * FROM public.\"Planes\"" );
-            connection.close();
-            while (s.next()) {
-                result.add(new Plane(s.getInt(1), s.getString("model"), s.getString("fullTitle"), s.getInt("numberOfSeats")));
-            }
-        } catch (SQLException e) {
-        }
-        return result;
-    } // ищем самолеты для выгрузки
+        return super.findPlanes();
+    }
     protected boolean findPlane(String model){
         connect();
         ResultSet s;
@@ -132,8 +123,6 @@ public class sqlcodeAdmistrator extends sqlcode {
         }
         return v == 1;
     }
-
-
 //    protected static Moder findModer(String idModer){
 //        connect();
 //        ResultSet s;
@@ -148,4 +137,20 @@ public class sqlcodeAdmistrator extends sqlcode {
 //            return null;
 //        }
 //    } // ищем модера для отображения
+    protected static boolean deleteButtonClickSql(Moder user){
+        connect();
+        int v = 0;
+        try{
+            v = sqlcode.stmt.executeUpdate("DELETE FROM public.\"Users\" WHERE login = '"+ user.getLogin().toString() + "'");
+        }
+         catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return v == 1;
+    }
+
+
 }
+
+
