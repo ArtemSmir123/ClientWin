@@ -1,6 +1,8 @@
 package com.example.airport;
 import com.example.airport.MenuAdministrator.MenuAdministratorController;
+import com.example.airport.MenuModerator.MenuModeratorController;
 import com.example.airport.objects.Admin;
+import com.example.airport.objects.Moder;
 import com.example.airport.objects.Users;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +37,13 @@ public class MainApp extends Application {
         //m.nor();
         MainApp.user = null;
     } // трансляция пользователя в подсистему
-    public static void menuModerator() throws IOException {
+    private static void translate1(Object user){
+        MenuModeratorController m = new MenuModeratorController();
+        m.setUser((Users) user);
+        //m.nor();
+        MainApp.user = null;
+    } // трансляция модератора в подсистему
+    public static void menuModerator(Moder moder) throws IOException {
         stage.setTitle("Панель управления модератора");
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("3.fxml"));
         FXMLLoader fxmlLoader1 = new FXMLLoader(MainApp.class.getResource("MenuModerator/Moder.fxml"));
@@ -44,6 +52,7 @@ public class MainApp extends Application {
         root.setCenter(fxmlLoader1.load());
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        translate1(moder);
         stage.show();
     } // загрузка панели модератора
     public static void menuAdministrator(Admin admin) throws IOException {

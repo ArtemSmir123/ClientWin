@@ -43,7 +43,7 @@ public class MainController {
         user = findUser(loginField.getText(), passwordField.getText());
         loginField.setText("");
         passwordField.setText("");
-        if (user instanceof Moder) MainApp.menuModerator();
+        if (user instanceof Moder) MainApp.menuModerator((Moder)user);
         if (user instanceof Admin) MainApp.menuAdministrator((Admin)user);
         if (user == null) exeptionLabel.setText("Введены неправильные логин или пароль");
     } // ввод логина пароля

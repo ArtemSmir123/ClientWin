@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44cbf95e-9322-4c0d-8220-d977e01c79d8" name="Changes" comment="Оптимизация кода&#10;Добавлены:&#10;кнопка выйти из программы&#10;убран и очищен ненужный код">
+    <list default="true" id="44cbf95e-9322-4c0d-8220-d977e01c79d8" name="Changes" comment="Усовершенствование поиска модераторов">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/MenuAdministratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/MenuAdministratorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/sqlcodeAdmistrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/sqlcodeAdmistrator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuAdministrator/Admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuAdministrator/Admin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuModerator/MenuModeratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuModerator/MenuModeratorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuModerator/sqlcodeModerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuModerator/sqlcodeModerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Flight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuModerator/Moder.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuModerator/Moder.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673791552506</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Усовершенствование поиска модераторов">
+      <created>1674981977061</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1674981977061</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -322,7 +332,8 @@
     <MESSAGE value="Доработан интерфейс пользователя в меню Администратора&#10;Добавлены новые функции&#10;Созданы заготовки на следующие реализации" />
     <MESSAGE value="Оптимизация кода&#10;Добавлены:&#10;редактирование модератора" />
     <MESSAGE value="Оптимизация кода&#10;Добавлены:&#10;кнопка выйти из программы&#10;убран и очищен ненужный код" />
-    <option name="LAST_COMMIT_MESSAGE" value="Оптимизация кода&#10;Добавлены:&#10;кнопка выйти из программы&#10;убран и очищен ненужный код" />
+    <MESSAGE value="Усовершенствование поиска модераторов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Усовершенствование поиска модераторов" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
