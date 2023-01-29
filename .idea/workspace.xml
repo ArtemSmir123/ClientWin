@@ -4,21 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44cbf95e-9322-4c0d-8220-d977e01c79d8" name="Changes" comment="Оптимизация кода&#10;Добавлены:&#10;редактирование модератора">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuModerator/MenuModeratorController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuModerator/sqlcodeModerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Flight.java" afterDir="false" />
+    <list default="true" id="44cbf95e-9322-4c0d-8220-d977e01c79d8" name="Changes" comment="Оптимизация кода&#10;Добавлены:&#10;кнопка выйти из программы&#10;убран и очищен ненужный код">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/MenuAdministratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/MenuAdministratorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/sqlcodeAdmistrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/sqlcodeAdmistrator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/sqlcode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/sqlcode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/airport/1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/1.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/airport/3.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/3.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuAdministrator/Admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuAdministrator/Admin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuModerator/Moder.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuModerator/Moder.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,6 +105,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Solutoin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Solutoin" />
+      <module name="Airport" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ав" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.airport.ав" />
       <module name="Airport" />
@@ -146,10 +143,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainApp" />
+        <item itemvalue="Application.Solutoin" />
         <item itemvalue="JUnit.TestPlane" />
         <item itemvalue="Application.адл" />
         <item itemvalue="Application.MainApp" />
-        <item itemvalue="JUnit.TestPlane" />
       </list>
     </recent_temporary>
   </component>
@@ -246,7 +243,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667738172575</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Оптимизация кода&#10;Добавлены:&#10;кнопка выйти из программы&#10;убран и очищен ненужный код">
+      <created>1673791552505</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1673791552506</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -317,7 +321,8 @@
     <MESSAGE value="Усовершенствован механизм идентификации&#10;Созданы классы и подклассы Users.java" />
     <MESSAGE value="Доработан интерфейс пользователя в меню Администратора&#10;Добавлены новые функции&#10;Созданы заготовки на следующие реализации" />
     <MESSAGE value="Оптимизация кода&#10;Добавлены:&#10;редактирование модератора" />
-    <option name="LAST_COMMIT_MESSAGE" value="Оптимизация кода&#10;Добавлены:&#10;редактирование модератора" />
+    <MESSAGE value="Оптимизация кода&#10;Добавлены:&#10;кнопка выйти из программы&#10;убран и очищен ненужный код" />
+    <option name="LAST_COMMIT_MESSAGE" value="Оптимизация кода&#10;Добавлены:&#10;кнопка выйти из программы&#10;убран и очищен ненужный код" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -325,14 +330,6 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.IllegalAccessException" package="java.lang" />
           <option name="timeStamp" value="25" />
-        </breakpoint>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.RuntimeException" package="java.lang" />
-          <option name="timeStamp" value="26" />
-        </breakpoint>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.NullPointerException" package="java.lang" />
-          <option name="timeStamp" value="30" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -22,13 +22,14 @@ class sqlcodeAdmistrator extends sqlcode {
         connect();
         ResultSet s;
         try {
-            s = sqlcode.stmt.executeQuery("SELECT model FROM public.\"Planes\" WHERE model = '" + model + "'");
-            s.next();
+            s = sqlcode.stmt.executeQuery("SELECT model FROM public.\"Planes\" WHERE model = '" + model + "'"); // переделать
             disconnect();
-            if (s.getString("model").equals(model)) return true;
+            s.next();
+            if (s.getRow() != 0) return false;
+            else return true;
         } catch (SQLException ex){
+            return true;
         }
-        return false;
     } // найти самолет, если нашли то true
 //    protected static Plane findPlane(Integer id){
 //        connect();
@@ -150,7 +151,93 @@ class sqlcodeAdmistrator extends sqlcode {
         return v == 1;
     }
 
+    protected ObservableList<Moder> findDefiniteModers(String searchField){
+        connect();
+        ResultSet s;
+        ObservableList<Moder> result = FXCollections.observableArrayList();
+        String searchField1[];
 
+        searchField = searchField.toLowerCase();
+        searchField1 = searchField.split(" ");
+        System.out.println(searchField1.length);
+        if(searchField1.length > 2) throw new RuntimeException();
+        // модуль преобразования строки
+        else if (searchField1.length == 2) {
+            try {
+
+                if(isDight(searchField)) {
+                    s = stmt.executeQuery("SELECT *\n" + "FROM public.\"Users\"\n" + "WHERE role = 'moder' AND ((login LIKE '%"+ searchField +"%') OR (login LIKE '%" + searchField + "') OR (login LIKE '" + searchField + "%'))"); // поиск по логину
+                } else {
+                    s = stmt.executeQuery("SELECT * \n" +
+                            "FROM public.\"Users\"\n" +
+                            "WHERE role = 'moder' AND (\n" +
+                            "\t(\n" +
+                            "\t\t((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%') AND\n" +
+                            "\t\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[1] + "%') \n" +
+                            "\t) or (\n" +
+                            "\t\t((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[1] + "%') AND\n" +
+                            "\t\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%') \n" +
+                            "\t) or (\n" +
+                            "\t\t((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%')\n" +
+                            "\t) or (\n" +
+                            "\t\t((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[1] + "%')\n" +
+                            "\t) or (\n" +
+                            "\t\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%') \n" +
+                            "\t) or (\n" +
+                            "\t\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[1] + "%') \n" +
+                            "\t)\n" +
+                            ")\n ORDER BY CASE \n" +
+                            "WHEN (\n" +
+                            "\t((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%') AND\n" +
+                            "\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[1] + "%')\n" +
+                            ") THEN 1\n" +
+                            "WHEN (((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[1] + "%') AND\n" +
+                            "\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%')\n" +
+                            ") THEN 1 \n" +
+                            "ELSE 2\n" +
+                            "END"); // поиск по параметрам
+                }
+                connection.close();
+                while (s.next()) {
+                    result.add(new Moder(s.getString("login"), s.getString("password"), s.getString("role"), s.getString("name"), s.getString("lastname")));
+                }
+            } catch (SQLException e) {
+            }
+        }
+        else {
+            try {
+
+                if(isDight(searchField)) {
+                    s = stmt.executeQuery("SELECT *\n" + "FROM public.\"Users\"\n" + "WHERE role = 'moder' AND ((login LIKE '%"+ searchField +"%') OR (login LIKE '%" + searchField + "') OR (login LIKE '" + searchField + "%'))"); // поиск по логину
+                } else {
+                    s = stmt.executeQuery("SELECT * \n" +
+                            "FROM public.\"Users\"\n" +
+                            "WHERE role = 'moder' AND (\n" +
+                            "\t(\n" +
+                            "\t\t((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%')\n" +
+                            "\t) OR \n" +
+                            "\t(\n" +
+                            "\t\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%') \n" +
+                            "\t)\n" +
+                            ")\n"); // поиск по параметрам
+                }
+                connection.close();
+                while (s.next()) {
+                    result.add(new Moder(s.getString("login"), s.getString("password"), s.getString("role"), s.getString("name"), s.getString("lastname")));
+                }
+            } catch (SQLException e) {
+            }
+        }
+        return result;
+    } // ищем определенного модера для выгрузки
+    private boolean isDight(String s){
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException ex){
+            return false;
+        }
+    } // проверка на число
 }
 
 

@@ -80,6 +80,11 @@ public class MenuAdministratorController {
     private Label lab3;
     @FXML
     private Label lab4;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private Label errorLabel;
+    
     public void setUser(Users us) {
         MenuAdministratorController.us = (Admin) us;
 //        System.out.println(us.toString());
@@ -152,35 +157,41 @@ public class MenuAdministratorController {
     @FXML
     protected void saveButtonPlane(ActionEvent event){
         boolean saveStatus = false;
-        boolean findStatus = ssa.findPlane(plane1.getText());
-        if (!findStatus) {
-            try {
+        boolean status = isDight(plane3.getText());
+        if (status){
+            boolean findStatus = ssa.findPlane(plane1.getText());
+            if (!findStatus) {
+                exep1.setText("Такой объект уже есть");
+            } else {
                 saveStatus = sqlcodeAdmistrator.savePlane(plane1.getText(), plane2.getText(), Integer.parseInt(plane3.getText()));
-                exep1.setText("сохранено");
-            } catch (NumberFormatException exception) {
-                exep1.setText("В поле количество необходимо \nпоставить цифру");
+                tableView();
+                exep1.setText("Самолет сохранен");
             }
-            if (saveStatus) exep1.setText("Данные сохранены");
         } else {
-            exep1.setText("Такой объект уже есть");
+            exep1.setText("Количество мест в самолете \nдолжно быть цифрой");
         }
     } // добавить и сохранить самолет в cистему
     @FXML
     protected void saveButtonModer(ActionEvent event){
-        boolean result = true;
-        int login = 0;
-        while (result){
-            login = 10000000 + (int) (Math.random() * 99999999);
-            result = sqlcodeAdmistrator.findLogin(login);
+        if(mod1.getText().equals("") || mod2.getText().equals("")){
+            exep2.setText("Поля пустые");
+        } else {
+            boolean result = true;
+            int login = 0;
+            while (result) {
+                login = 10000000 + (int) (Math.random() * 90000000);
+                result = sqlcodeAdmistrator.findLogin(login);
+            }
+            Moder moder = new Moder(String.valueOf(login), String.valueOf(login), "moder", mod1.getText(), mod2.getText());
+            boolean s = ssa.saveModer(moder);
+            if (s) exep2.setText("Пользователь создан,\nлогин и пароль: " + login);
+            else exep2.setText("Пользователь не создан,\nвозникли некоторые проблемы");
         }
-        Moder moder = new Moder(String.valueOf(login), String.valueOf(login), "moder", mod1.getText(), mod2.getText());
-        boolean s = ssa.saveModer(moder);
-        if (s) exep2.setText("Пользователь создан,\nлогин и пароль: " + login);
-        else exep2.setText("Пользователь не создан,\nвозникли некоторые проблемы");
+        tableview2();
     } // создать и сохранить модера в систему
     private boolean isDight(String s){
         try {
-            Integer.parseInt(tx3.getText());
+            Integer.parseInt(s);
             return true;
         } catch (NumberFormatException ex){
             return false;
@@ -236,7 +247,8 @@ public class MenuAdministratorController {
         tx4.setText("");
         tx5.setText("");
         user = null;
-        tableview2();
+        if(searchField.equals("")) tableview2();
+        else findModerInSystem();
     } // нажатие кнопки очистить поля в плашке модераторы
     @FXML
     protected void deleteButtonClick(){
@@ -252,4 +264,39 @@ public class MenuAdministratorController {
         }
         textClean2();
     } // кнопка удалить модератора
+
+    @FXML
+    private void findModerInSystem(){
+        ObservableList<Moder> forTable = null;
+        try{
+            forTable = ssa.findDefiniteModers(searchField.getText());
+        } catch (RuntimeException ex){
+            errorLabel.setText("Много слов в запросе");
+        }
+        table3.setItems(forTable);
+        k4.setCellValueFactory(new PropertyValueFactory<Moder, String>("login"));
+        k5.setCellValueFactory(new PropertyValueFactory<Moder, String>("lastname"));
+        k6.setCellValueFactory(new PropertyValueFactory<Moder, String>("name"));
+        TableView.TableViewSelectionModel<Moder> selectionModel = table3.getSelectionModel();
+        selectionModel.selectedItemProperty().addListener(new ChangeListener<Moder>(){
+            @Override
+            public void changed (ObservableValue < ? extends Moder > observableValue, Moder moder, Moder t1){
+                try {
+                    tx4.setText(observableValue.getValue().getName());
+                    tx5.setText(observableValue.getValue().getLastname());
+                    user = observableValue.getValue();
+                    sel2();
+                }
+                catch (NullPointerException ignored){
+                }
+            }
+        });
+        sel2();
+    }
+    @FXML
+    private void cleanModerButton(){
+        tableview2();
+        searchField.setText("");
+    }
+
 }
