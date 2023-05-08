@@ -17,6 +17,8 @@ import java.util.ArrayList;
 public class sqlcode {
     protected static Connection connection;
     protected static Statement stmt;
+    protected static HttpClient client = HttpClient.newHttpClient();
+    protected static JSONParser parser = new JSONParser();
     protected static void connect(){
         final String USER = "postgres";
         final String PASS = "1234";
@@ -37,17 +39,13 @@ public class sqlcode {
     } // коннект
 
     protected static Users findUser(String login, String pass) throws IOException, InterruptedException, ParseException {
-        HttpClient client = HttpClient.newHttpClient();
 
         JSONObject object = new JSONObject();
         object.put("login", login);
         object.put("pass", pass);
-
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8000/findUser")).POST(HttpRequest.BodyPublishers.ofString(object.toJSONString())).build();
         HttpResponse<String> response = null;
         response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        JSONParser parser = new JSONParser();
         JSONObject result = (JSONObject) parser.parse(response.body());
         if (result.get("role").equals("admin")){
             return new Admin((String) result.get("login"), (String) result.get("password"), (String) result.get("role"), (String) result.get("name"), (String) result.get("lastname"));
@@ -58,38 +56,32 @@ public class sqlcode {
     } // найти пользователя для login
 
     protected static boolean findLogin(int login) throws IOException, InterruptedException, ParseException {
-        HttpClient client = HttpClient.newHttpClient();
         JSONObject object = new JSONObject();
         object.put("query", login);
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8000/findLogin")).POST(HttpRequest.BodyPublishers.ofString(object.toJSONString())).build();
         HttpResponse<String> response = null;
         response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        JSONParser parser = new JSONParser();
         JSONObject result = (JSONObject) parser.parse(response.body());
         return (boolean) result.get("result");
     }
     protected ObservableList<Plane> findPlanes() throws IOException, InterruptedException, ParseException {
-        HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8000/findPlanes")).build();
         HttpResponse<String> response = null;
         response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-
-        JSONParser parser = new JSONParser();
         JSONObject result = (JSONObject) parser.parse(response.body());
         JSONArray result1 = (JSONArray) result.get("Plane");
-        ObservableList<Plane> a = FXCollections.observableArrayList();
+        ObservableList<Plane> finalResult = FXCollections.observableArrayList();
 
         for (int i = 0; i < result1.size(); i++){
             JSONObject result3 = (JSONObject) result1.get(i);
-            a.add(new Plane(
+            finalResult.add(new Plane(
                     Integer.parseInt(result3.get("id_plane").toString()),
                     String.valueOf(result3.get("model")),
                     String.valueOf(result3.get("fullTitle")),
                     Integer.parseInt(result3.get("numberOfSeats").toString())));
         }
-
-        return a;
+        return finalResult;
     } // ищем самолеты для выгрузки
 
 }
