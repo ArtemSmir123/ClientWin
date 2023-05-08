@@ -9,7 +9,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import static com.example.airport.MainApp.stage;
 import static com.example.airport.MainApp.stage1;
-import static com.example.airport.sqlcode.*;
+import static com.example.airport.sqlcode.findUser;
+
+import com.sun.net.httpserver.HttpServer;
+import org.json.simple.parser.ParseException;
+
 public class MainController {
     @FXML
     private TextField loginField; // поле логина
@@ -38,7 +42,7 @@ public class MainController {
         System.exit(0);
     } // кнопка закрыть программу
     @FXML
-    protected void login(ActionEvent event) throws IOException {
+    protected void login(ActionEvent event) throws IOException, ParseException, InterruptedException {
         exeptionLabel.setText("");
         user = findUser(loginField.getText(), passwordField.getText());
         loginField.setText("");

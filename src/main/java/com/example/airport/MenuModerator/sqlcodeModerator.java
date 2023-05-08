@@ -5,12 +5,14 @@ import com.example.airport.objects.Plane;
 import com.example.airport.sqlcode;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 class sqlcodeModerator extends sqlcode {
     @Override
-    protected ObservableList<Plane> findPlanes(){
+    protected ObservableList<Plane> findPlanes() throws IOException, ParseException, InterruptedException {
         return super.findPlanes();
     }
 

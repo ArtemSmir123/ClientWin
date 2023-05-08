@@ -11,12 +11,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 
 public class MenuAdministratorController {
     public MenuAdministratorController(){
     }
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException, ParseException, InterruptedException {
         tableView();
         tableview2();
         us = (Admin) MainApp.user;
@@ -91,7 +94,7 @@ public class MenuAdministratorController {
         nor();
     } // установить пользователя, как владельца сессии
     @FXML
-    protected void textClean1(){
+    protected void textClean1() throws IOException, ParseException, InterruptedException {
         tx1.setText("");
         tx2.setText("");
         tx3.setText("");
@@ -99,7 +102,7 @@ public class MenuAdministratorController {
         tableView();
     } // очищение полей в плашке самолеты
     @FXML
-    protected void savePlane(){
+    protected void savePlane() throws IOException, ParseException, InterruptedException {
         if (pl == null) {
             lab2.setText("Объект не выбран");
             //tableView();
@@ -123,14 +126,14 @@ public class MenuAdministratorController {
         }
     } // нажатие кнопки редактировать самолет (сохранение)
     @FXML
-    protected void deletePlane(){
+    protected void deletePlane() throws IOException, ParseException, InterruptedException {
         boolean result = sqlcodeAdmistrator.deletePlane(pl.getId_plane());
         if (result) lab2.setText("Объект удален");
         else lab2.setText("Объект не удален");
         textClean1();
     } // нажатие кнопки удалить самолет
     @FXML
-    protected void tableView(){
+    protected void tableView() throws IOException, ParseException, InterruptedException {
         ObservableList<Plane> forTable = ssa.findPlanes();
         table1.setItems(forTable);
         k1.setCellValueFactory(new PropertyValueFactory<Plane, String>("model"));
@@ -155,7 +158,7 @@ public class MenuAdministratorController {
         sel();
     } // Табличка самолетов
     @FXML
-    protected void saveButtonPlane(ActionEvent event){
+    protected void saveButtonPlane(ActionEvent event) throws IOException, ParseException, InterruptedException {
         boolean saveStatus = false;
         boolean status = isDight(plane3.getText());
         if (status){
@@ -172,7 +175,7 @@ public class MenuAdministratorController {
         }
     } // добавить и сохранить самолет в cистему
     @FXML
-    protected void saveButtonModer(ActionEvent event){
+    protected void saveButtonModer(ActionEvent event) throws IOException, ParseException, InterruptedException {
         if(mod1.getText().equals("") || mod2.getText().equals("")){
             exep2.setText("Поля пустые");
         } else {

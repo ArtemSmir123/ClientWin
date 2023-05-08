@@ -6,6 +6,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 public class MenuModeratorController {
@@ -13,7 +16,7 @@ public class MenuModeratorController {
     }
     sqlcodeModerator ssa = new sqlcodeModerator();
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException, ParseException, InterruptedException {
         tableView();
     }
     private static Moder us; // Владелец сесси
@@ -50,7 +53,7 @@ public class MenuModeratorController {
         MenuModeratorController.us = (Moder) us;
     } // установить пользователя, как владельца сессии
     @FXML
-    protected void tableView(){
+    protected void tableView() throws IOException, ParseException, InterruptedException {
         ObservableList<Plane> forTable = ssa.findPlanes();
         table1.setItems(forTable);
         k1.setCellValueFactory(new PropertyValueFactory<Plane, String>("model"));

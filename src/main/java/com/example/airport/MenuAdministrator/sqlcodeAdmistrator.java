@@ -6,7 +6,9 @@ import com.example.airport.sqlcode;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.jetbrains.annotations.NotNull;
+import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ import java.util.List;
 class sqlcodeAdmistrator extends sqlcode {
 
     @Override
-    protected ObservableList<Plane> findPlanes(){
+    protected ObservableList<Plane> findPlanes() throws IOException, ParseException, InterruptedException {
         return super.findPlanes();
     }
     protected boolean findPlane(String model){
@@ -84,7 +86,7 @@ class sqlcodeAdmistrator extends sqlcode {
         return v == 1;
     } // редактирование самолета в БД
 
-    protected static boolean findLogin(int login){
+    protected static boolean findLogin(int login) throws IOException, ParseException, InterruptedException {
         return sqlcode.findLogin(login);
     } // проверка по логину
     protected boolean saveModer(Moder moder){

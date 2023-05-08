@@ -3,6 +3,9 @@ module com.example.airport {
     requires javafx.fxml;
     requires java.sql;
     requires org.jetbrains.annotations;
+    requires jdk.httpserver;
+    requires java.net.http;
+    requires json.simple;
 
 
     opens com.example.airport to javafx.fxml;

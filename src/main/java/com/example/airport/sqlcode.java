@@ -1,12 +1,19 @@
 package com.example.airport;
-import com.example.airport.objects.Admin;
-import com.example.airport.objects.Moder;
-import com.example.airport.objects.Plane;
-import com.example.airport.objects.Users;
+import com.example.airport.objects.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.sql.*;
+import java.util.ArrayList;
+
 public class sqlcode {
     protected static Connection connection;
     protected static Statement stmt;
@@ -29,51 +36,60 @@ public class sqlcode {
         }
     } // коннект
 
-    protected static Users findUser(String login, String pass){
-        connect();
-        ResultSet s;
-            try {
-                s = stmt.executeQuery("SELECT * FROM public.\"Users\" WHERE login = '" + login + "' AND password = '" + pass + "'");
-                s.next();
-                disconnect();
-                if (s.getString("role").equals("moder"))
-                    return new Moder(s.getString("login"), s.getString("password"), s.getString("role"), s.getString("name"), s.getString("lastname"));
-                else if (s.getString("role").equals("admin"))
-                    return new Admin(s.getString("login"), s.getString("password"), s.getString("role"), s.getString("name"), s.getString("lastname"));
-                else return null;
-            } catch (SQLException ex){
-                return null;
-            }
+    protected static Users findUser(String login, String pass) throws IOException, InterruptedException, ParseException {
+        HttpClient client = HttpClient.newHttpClient();
+
+        JSONObject object = new JSONObject();
+        object.put("login", login);
+        object.put("pass", pass);
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8000/findUser")).POST(HttpRequest.BodyPublishers.ofString(object.toJSONString())).build();
+        HttpResponse<String> response = null;
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        JSONParser parser = new JSONParser();
+        JSONObject result = (JSONObject) parser.parse(response.body());
+        if (result.get("role").equals("admin")){
+            return new Admin((String) result.get("login"), (String) result.get("password"), (String) result.get("role"), (String) result.get("name"), (String) result.get("lastname"));
+        } else if (result.get("role").equals("moder")){
+            return new Moder((String) result.get("login"), (String) result.get("password"), (String) result.get("role"), (String) result.get("name"), (String) result.get("lastname"));
+        }
+        return null;
     } // найти пользователя для login
 
-    protected static boolean findLogin(int login){
-        connect();
-        ResultSet s;
-        try {
-            s = stmt.executeQuery("SELECT login FROM public.\"Users\" WHERE login = '" + String.valueOf(login)+ "'");
-            s.next();
-
-            if (s.getFetchSize() == 1) return true;
-            else {
-                return false;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    protected static boolean findLogin(int login) throws IOException, InterruptedException, ParseException {
+        HttpClient client = HttpClient.newHttpClient();
+        JSONObject object = new JSONObject();
+        object.put("query", login);
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8000/findLogin")).POST(HttpRequest.BodyPublishers.ofString(object.toJSONString())).build();
+        HttpResponse<String> response = null;
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        JSONParser parser = new JSONParser();
+        JSONObject result = (JSONObject) parser.parse(response.body());
+        return (boolean) result.get("result");
     }
-    protected ObservableList<Plane> findPlanes(){
-        connect();
-        ResultSet s;
-        ObservableList<Plane> result = FXCollections.observableArrayList();
-        try {
-            s = stmt.executeQuery("SELECT * FROM public.\"Planes\"" );
-            connection.close();
-            while (s.next()) {
-                result.add(new Plane(s.getInt(1), s.getString("model"), s.getString("fullTitle"), s.getInt("numberOfSeats")));
-            }
-        } catch (SQLException e) {
+    protected ObservableList<Plane> findPlanes() throws IOException, InterruptedException, ParseException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8000/findPlanes")).build();
+        HttpResponse<String> response = null;
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+
+        JSONParser parser = new JSONParser();
+        JSONObject result = (JSONObject) parser.parse(response.body());
+        JSONArray result1 = (JSONArray) result.get("Plane");
+        ObservableList<Plane> a = FXCollections.observableArrayList();
+
+        for (int i = 0; i < result1.size(); i++){
+            JSONObject result3 = (JSONObject) result1.get(i);
+            a.add(new Plane(
+                    Integer.parseInt(result3.get("id_plane").toString()),
+                    String.valueOf(result3.get("model")),
+                    String.valueOf(result3.get("fullTitle")),
+                    Integer.parseInt(result3.get("numberOfSeats").toString())));
         }
-        return result;
+
+        return a;
     } // ищем самолеты для выгрузки
 
 }
