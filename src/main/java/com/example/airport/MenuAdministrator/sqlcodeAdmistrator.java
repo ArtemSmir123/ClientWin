@@ -6,9 +6,14 @@ import com.example.airport.sqlcode;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.jetbrains.annotations.NotNull;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,99 +25,98 @@ class sqlcodeAdmistrator extends sqlcode {
     protected ObservableList<Plane> findPlanes() throws IOException, ParseException, InterruptedException {
         return super.findPlanes();
     }
-    protected boolean findPlane(String model){
-        connect();
-        ResultSet s;
-        try {
-            s = sqlcode.stmt.executeQuery("SELECT model FROM public.\"Planes\" WHERE model = '" + model + "'"); // переделать
-            disconnect();
-            s.next();
-            if (s.getRow() != 0) return false;
-            else return true;
-        } catch (SQLException ex){
-            return true;
-        }
+    protected boolean findPlane(String model) throws IOException, InterruptedException, ParseException {
+        StringBuilder query = new StringBuilder(model);
+        JSONObject query1 = new JSONObject();
+        query1.put("query", query.toString());
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "findPlane")).POST(HttpRequest.BodyPublishers.ofString(query1.toJSONString())).build();
+        HttpResponse<String> response = null;
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        JSONObject result = new JSONObject();
+        result = (JSONObject) parser.parse(response.body());
+        return Boolean.parseBoolean(result.get("result").toString());
     } // найти самолет, если нашли то true
-//    protected static Plane findPlane(Integer id){
-//        connect();
-//        ResultSet s;
-//        Plane plane = null;
-//        try {
-//            s = sqlcode.stmt.executeQuery("SELECT * FROM public.\"Planes\" WHERE id_planes = '" + id + "'");
-//            s.next();
-//            disconnect();
-//            String mod = s.getString("model");
-//            String tit = s.getString("fulltitle");
-//            Integer i = s.getInt("numberofseats");
-//
-//            plane = new Plane(id, s.getString("model"), s.getString("fulltitle"), s.getInt("numberofseats"));
-//        } catch (SQLException ex){
-//            System.out.println();
-//            ex.printStackTrace();
-//        }
-//        return plane;
-//    } // найти самолет и вернуть объект самолет
-    protected static boolean deletePlane(Integer id){
-        connect();
-        int v = 0;
-        try {
-            v = stmt.executeUpdate("DELETE FROM public.\"Planes\" WHERE id_planes = " + id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return v == 1;
+    protected static boolean deletePlane(Integer id) throws IOException, InterruptedException, ParseException {
+        JSONObject query1 = new JSONObject();
+        query1.put("query", id);
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "deletePlane")).POST(HttpRequest.BodyPublishers.ofString(query1.toJSONString())).build();
+        HttpResponse<String> response = null;
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        JSONObject result = new JSONObject();
+        result = (JSONObject) parser.parse(response.body());
+        return Boolean.parseBoolean(result.get("result").toString());
     } // удалить самолет
-    protected static boolean savePlane(String plane1, String plane2, int plane3) {
-        connect();
-        int v = 0;
-        try {
-            v = stmt.executeUpdate("INSERT INTO public.\"Planes\" (model,fullTitle, numberOfSeats)\n" +
-                    "VALUES ('" + plane1 + "', '" + plane2 + "', " + plane3 + ")");
-            disconnect();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return v == 1;
+    protected static boolean savePlane(String plane1, String plane2, int plane3) throws IOException, InterruptedException, ParseException {
+        JSONObject query1 = new JSONObject();
+        query1.put("model", plane1);
+        query1.put("fullTitle", plane2);
+        query1.put("numberOfSeats", String.valueOf(plane3));
+        JSONObject query2 = new JSONObject();
+        query2.put("Plane", query1);
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "savePlane")).POST(HttpRequest.BodyPublishers.ofString(query2.toJSONString())).build();
+        HttpResponse<String> response = null;
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        JSONObject result = new JSONObject();
+        result = (JSONObject) parser.parse(response.body());
+
+        return Boolean.parseBoolean(result.get("result").toString());
     } // сохранить самолет в БД
-    protected static boolean updatePlane(@NotNull Plane plane){
-        connect();
-        int v = 0;
-        try {
-            v = stmt.executeUpdate("UPDATE public.\"Planes\"" + " SET model = '" + plane.getModel() +  "', fulltitle = '" + plane.getFullTitle() +  "', numberofseats = " + plane.getNumberOfSeats() +  " WHERE id_planes = " + plane.getId_plane());
-            disconnect();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return v == 1;
+    protected static boolean updatePlane(@NotNull Plane plane) throws IOException, InterruptedException, ParseException {
+        JSONObject query1 = new JSONObject();
+        query1.put("id_plane", plane.getId_plane().toString());
+        query1.put("model", plane.getModel());
+        query1.put("fullTitle", plane.getFullTitle());
+        query1.put("numberOfSeats", plane.getNumberOfSeats().toString());
+        JSONObject query2 = new JSONObject();
+        query2.put("Plane", query1);
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "updatePlane")).POST(HttpRequest.BodyPublishers.ofString(query2.toJSONString())).build();
+        HttpResponse<String> response = null;
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        JSONObject result;
+        result = (JSONObject) parser.parse(response.body());
+        return Boolean.parseBoolean(result.get("result").toString());
     } // редактирование самолета в БД
 
     protected static boolean findLogin(int login) throws IOException, ParseException, InterruptedException {
         return sqlcode.findLogin(login);
     } // проверка по логину
-    protected boolean saveModer(Moder moder){
-        connect();
-        int v = 0;
-        try {
-            v = stmt.executeUpdate("INSERT INTO public.\"Users\"" + " VALUES ( '" + moder.getLogin() +  "', '" + moder.getPassword() + "', '" + moder.getRole() + "', '" + moder.getName() + "' , '" + moder.getLastname() + "')");
-            disconnect();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return v == 1;
+    protected boolean saveModer(Moder moder) throws IOException, InterruptedException, ParseException {
+        JSONObject query1 = new JSONObject();
+        query1.put("login", moder.getLogin());
+        query1.put("password", moder.getPassword());
+        query1.put("role", moder.getRole());
+        query1.put("name", moder.getName());
+        query1.put("lastname", moder.getLastname());
+        JSONObject query2 = new JSONObject();
+        query2.put("Moder", query1);
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "saveModer")).POST(HttpRequest.BodyPublishers.ofString(query2.toJSONString())).build();
+        HttpResponse<String> response = null;
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        JSONObject result;
+        result = (JSONObject) parser.parse(response.body());
+        return Boolean.parseBoolean(result.get("result").toString());
     } // сохранение модератора
-    protected ObservableList<Moder> findModers(){
-        connect();
-        ResultSet s;
-        ObservableList<Moder> result = FXCollections.observableArrayList();
-        try {
-            s = stmt.executeQuery("SELECT * FROM public.\"Users\" WHERE role = 'moder'" );
-            connection.close();
-            while (s.next()) {
-                result.add(new Moder(s.getString("login"), s.getString("password"), s.getString("role"), s.getString("name"), s.getString("lastname")));
-            }
-        } catch (SQLException e) {
+    protected ObservableList<Moder> findModers() throws ParseException, IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "findModers")).build();
+        HttpResponse<String> response = null;
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        JSONObject result = (JSONObject) parser.parse(response.body());
+        JSONArray result1 = (JSONArray) result.get("Moder");
+        ObservableList<Moder> finalResult = FXCollections.observableArrayList();
+
+        for (int i = 0; i < result1.size(); i++){
+            JSONObject result3 = (JSONObject) result1.get(i);
+            finalResult.add(new Moder(
+                    String.valueOf(result3.get("login")),
+                    String.valueOf(result3.get("password")),
+                    String.valueOf(result3.get("role")),
+                    String.valueOf(result3.get("name")),
+                    String.valueOf(result3.get("lastname"))));
         }
-        return result;
+        return finalResult;
     } // ищем модеров для выгрузки\
 
     protected static boolean editModerQuery(Moder user, String name, String lastname) {

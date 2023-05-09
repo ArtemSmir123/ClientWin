@@ -12,13 +12,14 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.UUID;
 
 public class sqlcode {
     protected static Connection connection;
     protected static Statement stmt;
     protected static HttpClient client = HttpClient.newHttpClient();
     protected static JSONParser parser = new JSONParser();
+    protected static String socket = "https://6a83-94-140-137-201.ngrok-free.app/";
     protected static void connect(){
         final String USER = "postgres";
         final String PASS = "1234";
@@ -43,29 +44,41 @@ public class sqlcode {
         JSONObject object = new JSONObject();
         object.put("login", login);
         object.put("pass", pass);
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8000/findUser")).POST(HttpRequest.BodyPublishers.ofString(object.toJSONString())).build();
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "findUser")).POST(HttpRequest.BodyPublishers.ofString(object.toJSONString())).build();
         HttpResponse<String> response = null;
-        response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        JSONObject result = (JSONObject) parser.parse(response.body());
-        if (result.get("role").equals("admin")){
-            return new Admin((String) result.get("login"), (String) result.get("password"), (String) result.get("role"), (String) result.get("name"), (String) result.get("lastname"));
-        } else if (result.get("role").equals("moder")){
-            return new Moder((String) result.get("login"), (String) result.get("password"), (String) result.get("role"), (String) result.get("name"), (String) result.get("lastname"));
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e){
+            return null;
         }
-        return null;
+        JSONObject result = (JSONObject) parser.parse(response.body());
+        if (!Boolean.parseBoolean(String.valueOf(result.get("result")))){
+            return null;
+        } else {
+            MainApp.uuid = UUID.fromString(String.valueOf(result.get("uuid")));
+            if (result.get("role").equals("admin")) {
+                return new Admin((String) result.get("login"), (String) result.get("password"), (String) result.get("role"), (String) result.get("name"), (String) result.get("lastname"));
+            } else if (result.get("role").equals("moder")) {
+                return new Moder((String) result.get("login"), (String) result.get("password"), (String) result.get("role"), (String) result.get("name"), (String) result.get("lastname"));
+            }
+            return null;
+        }
     } // найти пользователя для login
 
     protected static boolean findLogin(int login) throws IOException, InterruptedException, ParseException {
         JSONObject object = new JSONObject();
         object.put("query", login);
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8000/findLogin")).POST(HttpRequest.BodyPublishers.ofString(object.toJSONString())).build();
+        object.put("uuid", MainApp.uuid.toString());
+        System.out.println(object.toJSONString());
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "findLogin")).POST(HttpRequest.BodyPublishers.ofString(object.toJSONString())).build();
         HttpResponse<String> response = null;
         response = client.send(request, HttpResponse.BodyHandlers.ofString());
         JSONObject result = (JSONObject) parser.parse(response.body());
         return (boolean) result.get("result");
     }
     protected ObservableList<Plane> findPlanes() throws IOException, InterruptedException, ParseException {
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8000/findPlanes")).build();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "findPlanes")).build();
         HttpResponse<String> response = null;
         response = client.send(request, HttpResponse.BodyHandlers.ofString());
 

@@ -205,7 +205,7 @@ public class MenuAdministratorController {
             label1.setText(us.toString());
     } // запись о администрации
     @FXML
-    public void tableview2(){
+    public void tableview2() throws ParseException, IOException, InterruptedException {
         ObservableList<Moder> forTable = ssa.findModers();
         table3.setItems(forTable);
         k4.setCellValueFactory(new PropertyValueFactory<Moder, String>("login"));
@@ -236,7 +236,7 @@ public class MenuAdministratorController {
         else lab1.setText("Выбран объект:" + pl.toString());
     } // отражалка выбранного объекта из таблички самолеты
     @FXML
-    private void editModer() {
+    private void editModer() throws ParseException, IOException, InterruptedException {
         if (user == null) lab3.setText("Оператор не выбран \nвыберите оператора");
         else if (user.getName().equals(tx4.getText()) && user.getLastname().equals(tx5.getText()))
             lab3.setText("Вы не изменили данные\nоператора");
@@ -246,7 +246,7 @@ public class MenuAdministratorController {
             textClean2();
         }
     } // Редактировать модератора
-    protected void textClean2(){
+    protected void textClean2() throws ParseException, IOException, InterruptedException {
         tx4.setText("");
         tx5.setText("");
         user = null;
@@ -254,7 +254,7 @@ public class MenuAdministratorController {
         else findModerInSystem();
     } // нажатие кнопки очистить поля в плашке модераторы
     @FXML
-    protected void deleteButtonClick(){
+    protected void deleteButtonClick() throws ParseException, IOException, InterruptedException {
         if (user == null) {
             lab3.setText("Модер не выбран");
             return;
@@ -297,7 +297,7 @@ public class MenuAdministratorController {
         sel2();
     }
     @FXML
-    private void cleanModerButton(){
+    private void cleanModerButton() throws ParseException, IOException, InterruptedException {
         tableview2();
         searchField.setText("");
     }

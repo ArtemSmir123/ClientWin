@@ -49,7 +49,7 @@ public class MainController {
         passwordField.setText("");
         if (user instanceof Moder) MainApp.menuModerator((Moder)user);
         if (user instanceof Admin) MainApp.menuAdministrator((Admin)user);
-        if (user == null) exeptionLabel.setText("Введены неправильные логин или пароль");
+        if (user == null) exeptionLabel.setText("Введены неправильные логин или пароль или есть активная сессия");
     } // ввод логина пароля
 
 

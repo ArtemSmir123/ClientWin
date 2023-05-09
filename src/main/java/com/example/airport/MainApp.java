@@ -10,12 +10,14 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.UUID;
 
 
 public class MainApp extends Application {
     static Stage stage;
     static Stage stage1;
     public static Users user;
+    public static UUID uuid;
     @Override
     public void start(Stage stag) throws IOException {
         stage = stag;
