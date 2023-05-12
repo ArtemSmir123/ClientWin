@@ -119,16 +119,24 @@ class sqlcodeAdmistrator extends sqlcode {
         return finalResult;
     } // ищем модеров для выгрузки\
 
-    protected static boolean editModerQuery(Moder user, String name, String lastname) {
-        connect();
-        int v = 0;
-        try {
-            v = stmt.executeUpdate("UPDATE public.\"Users\"" + " SET name = '" + name + "', lastname = '" + lastname + "' WHERE login = '" + user.getLogin() + "'");
-            disconnect();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return v == 1;
+    protected static boolean editModerQuery(Moder user, String name, String lastname) throws IOException, InterruptedException, ParseException {
+        JSONObject query = new JSONObject();
+        query.put("login", user.getLogin());
+        query.put("password", user.getPassword());
+        query.put("role", user.getRole());
+        query.put("name", user.getName());
+        query.put("lastname", user.getLastname());
+        JSONObject query1 = new JSONObject();
+        query1.put("Moder", query);
+        query1.put("name", name);
+        query1.put("lastname", lastname);
+//        System.out.println(query1.toJSONString());
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "editModer")).POST(HttpRequest.BodyPublishers.ofString(query1.toJSONString())).build();
+        HttpResponse<String> response = null;
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+//        System.out.println(response.body());
+        JSONObject jsonObject = (JSONObject) parser.parse(response.body());
+        return Boolean.parseBoolean(jsonObject.get("result").toString());
     }
 //    protected static Moder findModer(String idModer){
 //        connect();
@@ -144,17 +152,20 @@ class sqlcodeAdmistrator extends sqlcode {
 //            return null;
 //        }
 //    } // ищем модера для отображения
-    protected static boolean deleteButtonClickSql(Moder user){
-        connect();
-        int v = 0;
-        try{
-            v = sqlcode.stmt.executeUpdate("DELETE FROM public.\"Users\" WHERE login = '"+ user.getLogin().toString() + "'");
-        }
-         catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return v == 1;
+    protected static boolean deleteButtonClickSql(Moder user) throws IOException, InterruptedException, ParseException {
+        JSONObject query = new JSONObject();
+        query.put("login", user.getLogin());
+        query.put("password", user.getPassword());
+        query.put("role", user.getRole());
+        query.put("name", user.getName());
+        query.put("lastname", user.getLastname());
+//        System.out.println(query);
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "deleteModer")).POST(HttpRequest.BodyPublishers.ofString(query.toJSONString())).build();
+        HttpResponse<String> response = null;
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+//        System.out.println(response.body());
+        JSONObject jsonObject = (JSONObject) parser.parse(response.body());
+        return Boolean.parseBoolean(jsonObject.get("result").toString());
     }
 
     protected ObservableList<Moder> findDefiniteModers(String searchField){
@@ -165,7 +176,7 @@ class sqlcodeAdmistrator extends sqlcode {
 
         searchField = searchField.toLowerCase();
         searchField1 = searchField.split(" ");
-        System.out.println(searchField1.length);
+//        System.out.println(searchField1.length);
         if(searchField1.length > 2) throw new RuntimeException();
         // модуль преобразования строки
         else if (searchField1.length == 2) {

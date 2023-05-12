@@ -56,7 +56,9 @@ public class sqlcode {
         if (!Boolean.parseBoolean(String.valueOf(result.get("result")))){
             return null;
         } else {
-            MainApp.uuid = UUID.fromString(String.valueOf(result.get("uuid")));
+            uuid = UUID.fromString(String.valueOf(result.get("uuid")));
+            sessionController sessionController = new sessionController();
+            sessionController.start();
             if (result.get("role").equals("admin")) {
                 return new Admin((String) result.get("login"), (String) result.get("password"), (String) result.get("role"), (String) result.get("name"), (String) result.get("lastname"));
             } else if (result.get("role").equals("moder")) {
@@ -69,8 +71,8 @@ public class sqlcode {
     protected static boolean findLogin(int login) throws IOException, InterruptedException, ParseException {
         JSONObject object = new JSONObject();
         object.put("query", login);
-        object.put("uuid", MainApp.uuid.toString());
-        System.out.println(object.toJSONString());
+        object.put("uuid", uuid.toString());
+//        System.out.println(object.toJSONString());
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "findLogin")).POST(HttpRequest.BodyPublishers.ofString(object.toJSONString())).build();
         HttpResponse<String> response = null;
         response = client.send(request, HttpResponse.BodyHandlers.ofString());

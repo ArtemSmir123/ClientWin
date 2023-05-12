@@ -5,12 +5,15 @@ import com.example.airport.objects.Admin;
 import com.example.airport.objects.Moder;
 import com.example.airport.objects.Users;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.UUID;
+
+import static javafx.application.Application.launch;
 
 
 public class MainApp extends Application {
@@ -79,6 +82,7 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
     } // загрузка меню пассажира
+
     public static void main(String[] args) {
         launch();
     }

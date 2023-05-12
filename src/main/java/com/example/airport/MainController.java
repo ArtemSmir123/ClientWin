@@ -25,6 +25,11 @@ public class MainController {
     public MainController() {
     }
     @FXML
+    private void initialize() throws IOException, ParseException, InterruptedException {
+//        MyThread thread = new MyThread();
+//        thread.start();
+    }
+    @FXML
     protected void passengerButtonClick(ActionEvent event) throws IOException {
         MainApp.menuPassenger();
     }
@@ -45,6 +50,8 @@ public class MainController {
     protected void login(ActionEvent event) throws IOException, ParseException, InterruptedException {
         exeptionLabel.setText("");
         user = findUser(loginField.getText(), passwordField.getText());
+//        sessionController sessionController = new sessionController();
+//        sessionController.start();
         loginField.setText("");
         passwordField.setText("");
         if (user instanceof Moder) MainApp.menuModerator((Moder)user);
