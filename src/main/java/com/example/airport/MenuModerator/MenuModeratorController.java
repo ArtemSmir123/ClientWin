@@ -115,7 +115,7 @@ public class MenuModeratorController {
         }
     } // Проверки для выгрузки в БД рейса
     @FXML
-    private void saveFlight(){
+    private void saveFlight() throws java.text.ParseException, IOException, ParseException, InterruptedException {
         if(examinationButton.getText().equals("Проверено")) {
             LocalDate las = dateOfFlight.getValue();
             Calendar departure_date = new GregorianCalendar(las.getYear(), las.getMonth().getValue(), las.getDayOfMonth());
@@ -126,7 +126,7 @@ public class MenuModeratorController {
             arrival_date = (Calendar) departure_date.clone();
             arrival_date.add(Calendar.HOUR, Integer.parseInt(timeField2.getText()));
             arrival_date.add(Calendar.MINUTE, Integer.parseInt(timeField3.getText()));
-            ssa.saveFlight(new Flight(selectedPlane.getId_plane(), us.getLogin(), currentDate.getTime(), departure_date.getTime(), arrival_date.getTime(), departureCity.getText() , arrivalCity.getText()));
+            ssa.saveFlight(new Flight(selectedPlane.getId_plane(), us.getLogin(), currentDate.getTime(), departure_date.getTime(), arrival_date.getTime(), departureCity.getText() , arrivalCity.getText(), 10));
         } else {
             errorLabel.setText("Проверки не пройдены");
         }

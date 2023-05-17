@@ -4,8 +4,12 @@ module com.example.airport {
     requires java.sql;
     requires org.jetbrains.annotations;
     requires jdk.httpserver;
-    requires java.net.http;
     requires json.simple;
+    requires java.net.http;
+    requires org.apache.httpcomponents.client5.httpclient5;
+    requires org.apache.httpcomponents.core5.httpcore5;
+    requires org.apache.httpcomponents.httpcore;
+//    requires com.sqareup.okhttp;
 
 
     opens com.example.airport to javafx.fxml;

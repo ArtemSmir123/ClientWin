@@ -5,19 +5,19 @@ import com.example.airport.objects.Users;
 import com.example.airport.sqlcode;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 class sqlcodeAdmistrator extends sqlcode {
 
@@ -27,23 +27,33 @@ class sqlcodeAdmistrator extends sqlcode {
     }
     protected boolean findPlane(String model) throws IOException, InterruptedException, ParseException {
         StringBuilder query = new StringBuilder(model);
-        JSONObject query1 = new JSONObject();
-        query1.put("query", query.toString());
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "findPlane")).POST(HttpRequest.BodyPublishers.ofString(query1.toJSONString())).build();
-        HttpResponse<String> response = null;
-        response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        JSONObject result = new JSONObject();
-        result = (JSONObject) parser.parse(response.body());
+        JSONObject objectQuery = new JSONObject();
+        objectQuery.put("query", query.toString());
+
+        HttpPost httpPost = httpPostQuery(objectQuery, "findPlane"); // Сконфигурировали запрос
+        CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
+        InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
+        StringBuilder stringBuilder = new StringBuilder();
+        new BufferedReader(new InputStreamReader(input))
+                .lines()
+                .forEach( (String s) -> stringBuilder.append(s + "\n") );
+        JSONObject result;
+        result = (JSONObject) parser.parse(String.valueOf(stringBuilder));
         return Boolean.parseBoolean(result.get("result").toString());
     } // найти самолет, если нашли то true
     protected static boolean deletePlane(Integer id) throws IOException, InterruptedException, ParseException {
-        JSONObject query1 = new JSONObject();
-        query1.put("query", id);
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "deletePlane")).POST(HttpRequest.BodyPublishers.ofString(query1.toJSONString())).build();
-        HttpResponse<String> response = null;
-        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        JSONObject objectQuery = new JSONObject();
+        objectQuery.put("query", id);
+
+        HttpPost httpPost = httpPostQuery(objectQuery, "deletePlane"); // Сконфигурировали запрос
+        CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
+        InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
+        StringBuilder stringBuilder = new StringBuilder();
+        new BufferedReader(new InputStreamReader(input))
+                .lines()
+                .forEach( (String s) -> stringBuilder.append(s + "\n") );
         JSONObject result = new JSONObject();
-        result = (JSONObject) parser.parse(response.body());
+        result = (JSONObject) parser.parse(String.valueOf(stringBuilder));
         return Boolean.parseBoolean(result.get("result").toString());
     } // удалить самолет
     protected static boolean savePlane(String plane1, String plane2, int plane3) throws IOException, InterruptedException, ParseException {
@@ -51,15 +61,19 @@ class sqlcodeAdmistrator extends sqlcode {
         query1.put("model", plane1);
         query1.put("fullTitle", plane2);
         query1.put("numberOfSeats", String.valueOf(plane3));
-        JSONObject query2 = new JSONObject();
-        query2.put("Plane", query1);
+        JSONObject objectQuery = new JSONObject();
+        objectQuery.put("Plane", query1);
 
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "savePlane")).POST(HttpRequest.BodyPublishers.ofString(query2.toJSONString())).build();
-        HttpResponse<String> response = null;
-        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpPost httpPost = httpPostQuery(objectQuery, "savePlane"); // Сконфигурировали запрос
+        CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
+        InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
+        StringBuilder stringBuilder = new StringBuilder();
+        new BufferedReader(new InputStreamReader(input))
+                .lines()
+                .forEach( (String s) -> stringBuilder.append(s + "\n") );
 
         JSONObject result = new JSONObject();
-        result = (JSONObject) parser.parse(response.body());
+        result = (JSONObject) parser.parse(String.valueOf(stringBuilder));
 
         return Boolean.parseBoolean(result.get("result").toString());
     } // сохранить самолет в БД
@@ -69,13 +83,19 @@ class sqlcodeAdmistrator extends sqlcode {
         query1.put("model", plane.getModel());
         query1.put("fullTitle", plane.getFullTitle());
         query1.put("numberOfSeats", plane.getNumberOfSeats().toString());
-        JSONObject query2 = new JSONObject();
-        query2.put("Plane", query1);
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "updatePlane")).POST(HttpRequest.BodyPublishers.ofString(query2.toJSONString())).build();
-        HttpResponse<String> response = null;
-        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        JSONObject objectQuery = new JSONObject();
+        objectQuery.put("Plane", query1);
+
+        HttpPost httpPost = httpPostQuery(objectQuery, "savePlane"); // Сконфигурировали запрос
+        CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
+        InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
+        StringBuilder stringBuilder = new StringBuilder();
+        new BufferedReader(new InputStreamReader(input))
+                .lines()
+                .forEach( (String s) -> stringBuilder.append(s + "\n") );
+
         JSONObject result;
-        result = (JSONObject) parser.parse(response.body());
+        result = (JSONObject) parser.parse(String.valueOf(stringBuilder));
         return Boolean.parseBoolean(result.get("result").toString());
     } // редактирование самолета в БД
 
@@ -89,21 +109,32 @@ class sqlcodeAdmistrator extends sqlcode {
         query1.put("role", moder.getRole());
         query1.put("name", moder.getName());
         query1.put("lastname", moder.getLastname());
-        JSONObject query2 = new JSONObject();
-        query2.put("Moder", query1);
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "saveModer")).POST(HttpRequest.BodyPublishers.ofString(query2.toJSONString())).build();
-        HttpResponse<String> response = null;
-        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        JSONObject objectQuery = new JSONObject();
+        objectQuery.put("Moder", query1);
+
+        HttpPost httpPost = httpPostQuery(objectQuery, "saveModer"); // Сконфигурировали запрос
+        CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
+        InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
+        StringBuilder stringBuilder = new StringBuilder();
+        new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))
+                .lines()
+                .forEach( (String s) -> stringBuilder.append(s + "\n") );
         JSONObject result;
-        result = (JSONObject) parser.parse(response.body());
+        result = (JSONObject) parser.parse(String.valueOf(stringBuilder));
         return Boolean.parseBoolean(result.get("result").toString());
     } // сохранение модератора
     protected ObservableList<Moder> findModers() throws ParseException, IOException, InterruptedException {
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "findModers")).build();
-        HttpResponse<String> response = null;
-        response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        JSONObject result = (JSONObject) parser.parse(response.body());
+        HttpGet httpget = httpGetQuery("findModers");
+        CloseableHttpResponse httpresponse = httpclient.execute(httpget);
+
+        InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
+        StringBuilder stringBuilder = new StringBuilder();
+        new BufferedReader(new InputStreamReader(input))
+                .lines()
+                .forEach( (String s) -> stringBuilder.append(s + "\n") );
+
+        JSONObject result = (JSONObject) parser.parse(String.valueOf(stringBuilder));
         JSONArray result1 = (JSONArray) result.get("Moder");
         ObservableList<Moder> finalResult = FXCollections.observableArrayList();
 
@@ -126,135 +157,68 @@ class sqlcodeAdmistrator extends sqlcode {
         query.put("role", user.getRole());
         query.put("name", user.getName());
         query.put("lastname", user.getLastname());
-        JSONObject query1 = new JSONObject();
-        query1.put("Moder", query);
-        query1.put("name", name);
-        query1.put("lastname", lastname);
-//        System.out.println(query1.toJSONString());
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "editModer")).POST(HttpRequest.BodyPublishers.ofString(query1.toJSONString())).build();
-        HttpResponse<String> response = null;
-        response = client.send(request, HttpResponse.BodyHandlers.ofString());
-//        System.out.println(response.body());
-        JSONObject jsonObject = (JSONObject) parser.parse(response.body());
+        JSONObject objectQuery = new JSONObject();
+        objectQuery.put("Moder", query);
+        objectQuery.put("name", name);
+        objectQuery.put("lastname", lastname);
+
+        System.out.println(objectQuery);
+        HttpPost httpPost = httpPostQuery(objectQuery, "editModer"); // Сконфигурировали запрос
+        CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
+        InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
+        StringBuilder stringBuilder = new StringBuilder();
+        new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))
+                .lines()
+                .forEach( (String s) -> stringBuilder.append(s + "\n") );
+        JSONObject jsonObject = (JSONObject) parser.parse(String.valueOf(stringBuilder));
         return Boolean.parseBoolean(jsonObject.get("result").toString());
     }
-//    protected static Moder findModer(String idModer){
-//        connect();
-//        ResultSet s;
-//        Moder result;
-//        try {
-//            s = stmt.executeQuery("SELECT * FROM public.\"Users\" WHERE login = '" + idModer + "'" );
-//            connection.close();
-//            s.next();
-//            result = new Moder(s.getString("login"), s.getString("password"), s.getString("role"), s.getString("name"), s.getString("lastname"));
-//            return result;
-//        } catch (SQLException e) {
-//            return null;
-//        }
-//    } // ищем модера для отображения
     protected static boolean deleteButtonClickSql(Moder user) throws IOException, InterruptedException, ParseException {
-        JSONObject query = new JSONObject();
-        query.put("login", user.getLogin());
-        query.put("password", user.getPassword());
-        query.put("role", user.getRole());
-        query.put("name", user.getName());
-        query.put("lastname", user.getLastname());
-//        System.out.println(query);
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "deleteModer")).POST(HttpRequest.BodyPublishers.ofString(query.toJSONString())).build();
-        HttpResponse<String> response = null;
-        response = client.send(request, HttpResponse.BodyHandlers.ofString());
-//        System.out.println(response.body());
-        JSONObject jsonObject = (JSONObject) parser.parse(response.body());
+        JSONObject objectQuery = new JSONObject();
+        objectQuery.put("login", user.getLogin());
+        objectQuery.put("password", user.getPassword());
+        objectQuery.put("role", user.getRole());
+        objectQuery.put("name", user.getName());
+        objectQuery.put("lastname", user.getLastname());
+
+        HttpPost httpPost = httpPostQuery(objectQuery, "deleteModer"); // Сконфигурировали запрос
+        CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
+        InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
+        StringBuilder stringBuilder = new StringBuilder();
+        new BufferedReader(new InputStreamReader(input))
+                .lines()
+                .forEach( (String s) -> stringBuilder.append(s + "\n") );
+
+        JSONObject jsonObject = (JSONObject) parser.parse(String.valueOf(stringBuilder));
         return Boolean.parseBoolean(jsonObject.get("result").toString());
     }
 
-    protected ObservableList<Moder> findDefiniteModers(String searchField){
-        connect();
-        ResultSet s;
-        ObservableList<Moder> result = FXCollections.observableArrayList();
-        String searchField1[];
+    protected ObservableList<Moder> findDefiniteModers(String searchField) throws IOException, InterruptedException, ParseException {
+        JSONObject objectQuery = new JSONObject();
+        objectQuery.put("queryString", searchField);
 
-        searchField = searchField.toLowerCase();
-        searchField1 = searchField.split(" ");
-//        System.out.println(searchField1.length);
-        if(searchField1.length > 2) throw new RuntimeException();
-        // модуль преобразования строки
-        else if (searchField1.length == 2) {
-            try {
+        HttpPost httpPost = httpPostQuery(objectQuery, "findDefiniteModers"); // Сконфигурировали запрос
+        CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
+        InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
+        StringBuilder stringBuilder = new StringBuilder();
+        new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))
+                .lines()
+                .forEach( (String s) -> stringBuilder.append(s + "\n") );
 
-                if(isDight(searchField)) {
-                    s = stmt.executeQuery("SELECT *\n" + "FROM public.\"Users\"\n" + "WHERE role = 'moder' AND ((login LIKE '%"+ searchField +"%') OR (login LIKE '%" + searchField + "') OR (login LIKE '" + searchField + "%'))"); // поиск по логину
-                } else {
-                    s = stmt.executeQuery("SELECT * \n" +
-                            "FROM public.\"Users\"\n" +
-                            "WHERE role = 'moder' AND (\n" +
-                            "\t(\n" +
-                            "\t\t((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%') AND\n" +
-                            "\t\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[1] + "%') \n" +
-                            "\t) or (\n" +
-                            "\t\t((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[1] + "%') AND\n" +
-                            "\t\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%') \n" +
-                            "\t) or (\n" +
-                            "\t\t((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%')\n" +
-                            "\t) or (\n" +
-                            "\t\t((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[1] + "%')\n" +
-                            "\t) or (\n" +
-                            "\t\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%') \n" +
-                            "\t) or (\n" +
-                            "\t\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[1] + "%') \n" +
-                            "\t)\n" +
-                            ")\n ORDER BY CASE \n" +
-                            "WHEN (\n" +
-                            "\t((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%') AND\n" +
-                            "\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[1] + "%')\n" +
-                            ") THEN 1\n" +
-                            "WHEN (((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[1] + "%') AND\n" +
-                            "\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%')\n" +
-                            ") THEN 1 \n" +
-                            "ELSE 2\n" +
-                            "END"); // поиск по параметрам
-                }
-                connection.close();
-                while (s.next()) {
-                    result.add(new Moder(s.getString("login"), s.getString("password"), s.getString("role"), s.getString("name"), s.getString("lastname")));
-                }
-            } catch (SQLException e) {
-            }
+        JSONObject result = (JSONObject) parser.parse(String.valueOf(stringBuilder));
+        ObservableList<Moder> finalresult = FXCollections.observableArrayList();
+        JSONArray result1 = (JSONArray) result.get("Moder");
+        for (int i = 0; i < result1.size(); i++){
+            JSONObject result3 = (JSONObject) result1.get(i);
+            finalresult.add(new Moder(
+                    String.valueOf(result3.get("login")),
+                    String.valueOf(result3.get("password")),
+                    String.valueOf(result3.get("role")),
+                    String.valueOf(result3.get("name")),
+                    String.valueOf(result3.get("lastname"))));
         }
-        else {
-            try {
-
-                if(isDight(searchField)) {
-                    s = stmt.executeQuery("SELECT *\n" + "FROM public.\"Users\"\n" + "WHERE role = 'moder' AND ((login LIKE '%"+ searchField +"%') OR (login LIKE '%" + searchField + "') OR (login LIKE '" + searchField + "%'))"); // поиск по логину
-                } else {
-                    s = stmt.executeQuery("SELECT * \n" +
-                            "FROM public.\"Users\"\n" +
-                            "WHERE role = 'moder' AND (\n" +
-                            "\t(\n" +
-                            "\t\t((name COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%')\n" +
-                            "\t) OR \n" +
-                            "\t(\n" +
-                            "\t\t((lastname COLLATE \"ru_RU\") ILIKE '%" + searchField1[0] + "%') \n" +
-                            "\t)\n" +
-                            ")\n"); // поиск по параметрам
-                }
-                connection.close();
-                while (s.next()) {
-                    result.add(new Moder(s.getString("login"), s.getString("password"), s.getString("role"), s.getString("name"), s.getString("lastname")));
-                }
-            } catch (SQLException e) {
-            }
-        }
-        return result;
+        return finalresult;
     } // ищем определенного модера для выгрузки
-    private boolean isDight(String s){
-        try {
-            Integer.parseInt(s);
-            return true;
-        } catch (NumberFormatException ex){
-            return false;
-        }
-    } // проверка на число
 }
 
 

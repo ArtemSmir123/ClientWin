@@ -275,6 +275,12 @@ public class MenuAdministratorController {
             forTable = ssa.findDefiniteModers(searchField.getText());
         } catch (RuntimeException ex){
             errorLabel.setText("Много слов в запросе");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
         table3.setItems(forTable);
         k4.setCellValueFactory(new PropertyValueFactory<Moder, String>("login"));

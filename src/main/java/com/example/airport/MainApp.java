@@ -5,14 +5,26 @@ import com.example.airport.objects.Admin;
 import com.example.airport.objects.Moder;
 import com.example.airport.objects.Users;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
+
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.UUID;
 
+import static com.example.airport.sqlcode.*;
 import static javafx.application.Application.launch;
 
 
@@ -33,6 +45,14 @@ public class MainApp extends Application {
         stage1.setResizable(false);
         stage1.initOwner(stage);
         stage.show();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent e) {
+                Platform.exit();
+                System.exit(0);
+            }
+        }); // при закрытии окна (главного)
+
     } // загрузка главного меню
     private static void translate(Object user){
         MenuAdministratorController m = new MenuAdministratorController();
@@ -57,6 +77,7 @@ public class MainApp extends Application {
         stage.setScene(scene);
         translate1(moder);
         stage.show();
+        StageCont cont = new StageCont();
     } // загрузка панели модератора
     public static void menuAdministrator(Admin admin) throws IOException {
         stage.setTitle("Панель управления администратора");
@@ -85,5 +106,13 @@ public class MainApp extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+}
+class StageCont extends Thread{
+    public void run() {
+        while (MainApp.stage.isShowing() || MainApp.stage1.isShowing()){
+            continue;
+        }
+        System.exit(0);
     }
 }

@@ -1,4 +1,7 @@
 package com.example.airport.objects;
+
+import org.json.simple.JSONObject;
+
 public abstract class Users {
     private final String login;
     private String password;
@@ -30,8 +33,9 @@ public abstract class Users {
     }
     @Override
     public String toString(){
-        return "Логин:" + this.login + ", \nимя: " + this.name + ", фамилия: " + this.lastname;
+        return "Логин:" + this.login + ", имя: " + this.name + ", фамилия: " + this.lastname;
     }
+
 }
 
 

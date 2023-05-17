@@ -1,68 +1,91 @@
 package com.example.airport;
+
 import com.example.airport.objects.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.json.simple.*;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.entity.UrlEncodedFormEntity;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.apache.http.protocol.HTTP;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.sql.*;
+import java.nio.charset.Charset;
 import java.util.UUID;
+import static com.example.airport.MainApp.uuid;
+import static org.apache.http.params.CoreProtocolPNames.HTTP_CONTENT_CHARSET;
+
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 
 public class sqlcode {
-    protected static Connection connection;
-    protected static Statement stmt;
-    protected static HttpClient client = HttpClient.newHttpClient();
+    protected static CloseableHttpClient httpclient = HttpClients.createDefault();
+
     protected static JSONParser parser = new JSONParser();
-    protected static String socket = "https://6a83-94-140-137-201.ngrok-free.app/";
-    protected static void connect(){
-        final String USER = "postgres";
-        final String PASS = "1234";
-        final String DB_URL = "jdbc:postgresql://localhost:5432/Flights?currentSchema=public&user=" + USER + "&password=" + PASS ;
+    protected static String socket = "https://9759-94-140-137-201.ngrok-free.app/";
+    protected static HttpPost httpPostQuery( JSONObject object, String param1){
+        HttpPost httpPost = new HttpPost(socket + param1);
+        StringEntity entity = new StringEntity(object.toJSONString(), Charset.defaultCharset());
+//        System.out.println(entity);
+        httpPost.setEntity(entity);
+        httpPost.setHeader("Accept", "text/plain");
+        httpPost.setHeader("Content-type", "text/plain; charset=UTF-8");
+//        httpPost.setHeader(HTTP_CONTENT_CHARSET, "UTF-8");
+        return httpPost;
+    }
+    protected static HttpGet httpGetQuery(String param1){
+        HttpGet httpGet = new HttpGet(socket + param1);
+//        StringEntity entity = new StringEntity(object.toJSONString());
+//        httpPost.setEntity(entity);
+//        httpPost.setHeader("Accept", "application/json");
+//        httpPost.setHeader("Content-type", "application/json");
+        return httpGet;
+    }
+    protected static Users findUser(String login, String pass) throws IOException, ParseException {
+        Autorit autorit = new Autorit(login, pass); // Сделали объект
+        JSONObject object = autorit.toJSONObject(); // Перевели в JSON
+        HttpPost httpPost = httpPostQuery(object, "findUser"); // Сконфигурировали запрос
+        CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
+        InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
+        StringBuilder stringBuilder = new StringBuilder();
+        new BufferedReader(new InputStreamReader(input))
+                .lines()
+                .forEach( (String s) -> stringBuilder.append(s + "\n") );
+        JSONObject res1;
         try {
-            connection = DriverManager.getConnection(DB_URL);
-            stmt = connection.createStatement();
-        } catch (SQLException e) {
-            System.out.println("Подключение не удалось");
-        }
-    } // коннект
-    protected static void disconnect(){
-        try {
-            connection.close();
-        } catch (SQLException e) {
+            res1 = (JSONObject) parser.parse(String.valueOf(stringBuilder));
+        } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-    } // коннект
-
-    protected static Users findUser(String login, String pass) throws IOException, InterruptedException, ParseException {
-
-        JSONObject object = new JSONObject();
-        object.put("login", login);
-        object.put("pass", pass);
-
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "findUser")).POST(HttpRequest.BodyPublishers.ofString(object.toJSONString())).build();
-        HttpResponse<String> response = null;
-        try {
-            response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException e){
-            return null;
-        }
-        JSONObject result = (JSONObject) parser.parse(response.body());
+        JSONObject result = (JSONObject) parser.parse(String.valueOf(res1));
+//        System.out.println(result);
         if (!Boolean.parseBoolean(String.valueOf(result.get("result")))){
             return null;
         } else {
-            uuid = UUID.fromString(String.valueOf(result.get("uuid")));
+            JSONObject regist = (JSONObject) result.get("Regist");
+            uuid = UUID.fromString(String.valueOf(regist.get("uuid")));
             sessionController sessionController = new sessionController();
             sessionController.start();
-            if (result.get("role").equals("admin")) {
-                return new Admin((String) result.get("login"), (String) result.get("password"), (String) result.get("role"), (String) result.get("name"), (String) result.get("lastname"));
-            } else if (result.get("role").equals("moder")) {
-                return new Moder((String) result.get("login"), (String) result.get("password"), (String) result.get("role"), (String) result.get("name"), (String) result.get("lastname"));
+
+            if (result.containsKey("Admin")) {
+                JSONObject result2 = (JSONObject) result.get("Admin");
+                return new Admin((String) result2.get("login"), (String) result2.get("password"), (String) result2.get("role"), (String) result2.get("name"), (String) result2.get("lastname"));
+            } else if (result.containsKey("Moder")) {
+                JSONObject result2 = (JSONObject) result.get("Moder");
+                return new Moder((String) result2.get("login"), (String) result2.get("password"), (String) result2.get("role"), (String) result2.get("name"), (String) result2.get("lastname"));
             }
             return null;
         }
@@ -72,22 +95,37 @@ public class sqlcode {
         JSONObject object = new JSONObject();
         object.put("query", login);
         object.put("uuid", uuid.toString());
-//        System.out.println(object.toJSONString());
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "findLogin")).POST(HttpRequest.BodyPublishers.ofString(object.toJSONString())).build();
-        HttpResponse<String> response = null;
-        response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        JSONObject result = (JSONObject) parser.parse(response.body());
-        return (boolean) result.get("result");
+
+        HttpPost httpPost = httpPostQuery(object, "findLogin"); // Сконфигурировали запрос
+        CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
+        InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
+        StringBuilder stringBuilder = new StringBuilder();
+        new BufferedReader(new InputStreamReader(input))
+                .lines()
+                .forEach( (String s) -> stringBuilder.append(s + "\n") );
+        JSONObject res1;
+        try {
+            res1 = (JSONObject) parser.parse(String.valueOf(stringBuilder));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        return (boolean) res1.get("result");
+
     }
     protected ObservableList<Plane> findPlanes() throws IOException, InterruptedException, ParseException {
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(socket + "findPlanes")).build();
-        HttpResponse<String> response = null;
-        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpGet httpget = httpGetQuery("findPlanes");
+        CloseableHttpResponse httpresponse = httpclient.execute(httpget);
 
-        JSONObject result = (JSONObject) parser.parse(response.body());
+        InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
+        StringBuilder stringBuilder = new StringBuilder();
+        new BufferedReader(new InputStreamReader(input))
+                .lines()
+                .forEach( (String s) -> stringBuilder.append(s + "\n") );
+
+        JSONObject result = (JSONObject) parser.parse(String.valueOf(stringBuilder));
         JSONArray result1 = (JSONArray) result.get("Plane");
-        ObservableList<Plane> finalResult = FXCollections.observableArrayList();
 
+        ObservableList<Plane> finalResult = FXCollections.observableArrayList();
         for (int i = 0; i < result1.size(); i++){
             JSONObject result3 = (JSONObject) result1.get(i);
             finalResult.add(new Plane(
