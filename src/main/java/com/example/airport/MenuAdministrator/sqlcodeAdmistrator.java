@@ -86,7 +86,7 @@ class sqlcodeAdmistrator extends sqlcode {
         JSONObject objectQuery = new JSONObject();
         objectQuery.put("Plane", query1);
 
-        HttpPost httpPost = httpPostQuery(objectQuery, "savePlane"); // Сконфигурировали запрос
+        HttpPost httpPost = httpPostQuery(objectQuery, "updatePlane"); // Сконфигурировали запрос
         CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
         InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
         StringBuilder stringBuilder = new StringBuilder();
