@@ -34,7 +34,7 @@ class sqlcodeAdmistrator extends sqlcode {
         CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
         InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
         StringBuilder stringBuilder = new StringBuilder();
-        new BufferedReader(new InputStreamReader(input))
+        new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))
                 .lines()
                 .forEach( (String s) -> stringBuilder.append(s + "\n") );
         JSONObject result;
@@ -49,7 +49,7 @@ class sqlcodeAdmistrator extends sqlcode {
         CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
         InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
         StringBuilder stringBuilder = new StringBuilder();
-        new BufferedReader(new InputStreamReader(input))
+        new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))
                 .lines()
                 .forEach( (String s) -> stringBuilder.append(s + "\n") );
         JSONObject result = new JSONObject();
@@ -68,7 +68,7 @@ class sqlcodeAdmistrator extends sqlcode {
         CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
         InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
         StringBuilder stringBuilder = new StringBuilder();
-        new BufferedReader(new InputStreamReader(input))
+        new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))
                 .lines()
                 .forEach( (String s) -> stringBuilder.append(s + "\n") );
 
@@ -90,7 +90,7 @@ class sqlcodeAdmistrator extends sqlcode {
         CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
         InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
         StringBuilder stringBuilder = new StringBuilder();
-        new BufferedReader(new InputStreamReader(input))
+        new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))
                 .lines()
                 .forEach( (String s) -> stringBuilder.append(s + "\n") );
 
@@ -130,7 +130,7 @@ class sqlcodeAdmistrator extends sqlcode {
 
         InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
         StringBuilder stringBuilder = new StringBuilder();
-        new BufferedReader(new InputStreamReader(input))
+        new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))
                 .lines()
                 .forEach( (String s) -> stringBuilder.append(s + "\n") );
 
@@ -185,7 +185,7 @@ class sqlcodeAdmistrator extends sqlcode {
         CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
         InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
         StringBuilder stringBuilder = new StringBuilder();
-        new BufferedReader(new InputStreamReader(input))
+        new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))
                 .lines()
                 .forEach( (String s) -> stringBuilder.append(s + "\n") );
 

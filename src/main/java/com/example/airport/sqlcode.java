@@ -10,7 +10,7 @@ import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.apache.http.protocol.HTTP;
+//import org.apache.http.protocol.HTTP;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -20,14 +20,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.UUID;
 import static com.example.airport.MainApp.uuid;
-import static org.apache.http.params.CoreProtocolPNames.HTTP_CONTENT_CHARSET;
+//import static org.apache.http.params.CoreProtocolPNames.HTTP_CONTENT_CHARSET;
 
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 
@@ -38,7 +36,7 @@ public class sqlcode {
     protected static String socket = "https://9759-94-140-137-201.ngrok-free.app/";
     protected static HttpPost httpPostQuery( JSONObject object, String param1){
         HttpPost httpPost = new HttpPost(socket + param1);
-        StringEntity entity = new StringEntity(object.toJSONString(), Charset.defaultCharset());
+        StringEntity entity = new StringEntity(object.toJSONString(), StandardCharsets.UTF_8);
 //        System.out.println(entity);
         httpPost.setEntity(entity);
         httpPost.setHeader("Accept", "text/plain");
@@ -61,7 +59,7 @@ public class sqlcode {
         CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
         InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
         StringBuilder stringBuilder = new StringBuilder();
-        new BufferedReader(new InputStreamReader(input))
+        new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))
                 .lines()
                 .forEach( (String s) -> stringBuilder.append(s + "\n") );
         JSONObject res1;
@@ -100,7 +98,7 @@ public class sqlcode {
         CloseableHttpResponse httpresponse = httpclient.execute(httpPost); // Отправили
         InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
         StringBuilder stringBuilder = new StringBuilder();
-        new BufferedReader(new InputStreamReader(input))
+        new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))
                 .lines()
                 .forEach( (String s) -> stringBuilder.append(s + "\n") );
         JSONObject res1;
@@ -118,7 +116,7 @@ public class sqlcode {
 
         InputStream input = httpresponse.getEntity().getContent(); // Получили ответ
         StringBuilder stringBuilder = new StringBuilder();
-        new BufferedReader(new InputStreamReader(input))
+        new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))
                 .lines()
                 .forEach( (String s) -> stringBuilder.append(s + "\n") );
 

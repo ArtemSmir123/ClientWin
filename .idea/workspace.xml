@@ -2,41 +2,14 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Airport:jar" />
+      <artifact name="Air" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44cbf95e-9322-4c0d-8220-d977e01c79d8" name="Changes" comment="откорректирован findPlane&#10;откорректирован deletePlane&#10;откорректировано еще несколько объектов&#10;адрес объединен в socket">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MainAppLauncher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Objects.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/TestPlane.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/objects/TestJSONObjects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Airport_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Airport_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Airport_jar/Airport_jar.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/MenuAdministratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/MenuAdministratorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/sqlcodeAdmistrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuAdministrator/sqlcodeAdmistrator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuModerator/MenuModeratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuModerator/MenuModeratorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuModerator/sqlcodeModerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/MenuModerator/sqlcodeModerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Autorit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Autorit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Flight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Moder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Moder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Plane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/objects/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/sessionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/sessionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/airport/sqlcode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/airport/sqlcode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/objects/TestPlane.java" beforeDir="false" />
-    </list>
+    <list default="true" id="44cbf95e-9322-4c0d-8220-d977e01c79d8" name="Changes" comment="Избавились от Java 11" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,26 +52,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "jdk.selected.JAVA_MODULE": "openjdk-19",
-    "last_directory_selection": "/Users/artemsmirnov/Documents/Наработки/Airport/src/main/java",
-    "last_opened_file_path": "/Users/artemsmirnov/Documents/Наработки/Client",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.61149424",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "editor.preferences.jsonOptions"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/artemsmirnov/Documents/Наработки/Airport/src/main/java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;Z:/Documents/Наработки/Windows/Client/src/main/resources/META-INF/MANIFEST.MF&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.61149424&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/com/example/airport/MenuAdministrator" />
@@ -117,10 +90,11 @@
       <command value="TestPlane" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.MainApp">
+  <component name="RunManager" selected="JAR Application.Airport-1.0.jar">
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.airport.MainApp" />
       <module name="Airport" />
+      <option name="VM_PARAMETERS" value="-Dfile.encoding=windows-1251" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.airport.*" />
@@ -131,71 +105,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestJSONObjects" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Airport" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="objects.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="objects" />
-      <option name="MAIN_CLASS_NAME" value="objects.TestJSONObjects" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="Airport-1.0.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/Airport-1.0.jar" />
+      <method v="2" />
     </configuration>
-    <configuration name="TestJSONObjects.testJSONPlane" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Airport" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="objects.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="objects" />
-      <option name="MAIN_CLASS_NAME" value="objects.TestJSONObjects" />
-      <option name="METHOD_NAME" value="testJSONPlane" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="Airport.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/AirportAA/Airport.jar" />
+      <method v="2" />
     </configuration>
-    <configuration name="TestPlane.testAutor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Airport" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestPlane" />
-      <option name="METHOD_NAME" value="testAutor" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestPlane.testTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Airport" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestPlane" />
-      <option name="METHOD_NAME" value="testTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="Airport_jar.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/Airport_jar/Airport_jar.jar" />
+      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Application.MainApp" />
-      <item itemvalue="JUnit.TestJSONObjects" />
-      <item itemvalue="JUnit.TestJSONObjects.testJSONPlane" />
-      <item itemvalue="JUnit.TestPlane.testAutor" />
-      <item itemvalue="JUnit.TestPlane.testTest" />
+      <item itemvalue="JAR Application.Airport-1.0.jar" />
+      <item itemvalue="JAR Application.Airport.jar" />
+      <item itemvalue="JAR Application.Airport_jar.jar" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR Application.Airport-1.0.jar" />
+        <item itemvalue="JAR Application.Airport_jar.jar" />
+        <item itemvalue="JAR Application.Airport.jar" />
         <item itemvalue="Application.MainApp" />
-        <item itemvalue="JUnit.TestJSONObjects" />
-        <item itemvalue="JUnit.TestPlane.testAutor" />
-        <item itemvalue="JUnit.TestPlane.testTest" />
-        <item itemvalue="JUnit.TestJSONObjects.testJSONPlane" />
       </list>
     </recent_temporary>
   </component>
@@ -320,10 +253,22 @@
       <option name="project" value="LOCAL" />
       <updated>1683917559048</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Избавились от Java 11">
+      <created>1684342074807</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1684342074807</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="e265646a-5b6b-4510-95c6-486a8e860935" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="1af24aa4-8556-4911-b5c7-9f48db3a9819">
@@ -351,7 +296,6 @@
         <entry key="e265646a-5b6b-4510-95c6-486a8e860935">
           <value>
             <State>
-              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -370,14 +314,10 @@
                   </entry>
                 </map>
               </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
             </State>
           </value>
         </entry>
-      </map>
-    </option>
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="e265646a-5b6b-4510-95c6-486a8e860935" value="TOOL_WINDOW" />
       </map>
     </option>
   </component>
@@ -395,7 +335,8 @@
     <MESSAGE value="Усовершенствование поиска модераторов" />
     <MESSAGE value="Добавлено создание рейса у модераторов&#10;Усовершеннствован поиск модератора" />
     <MESSAGE value="откорректирован findPlane&#10;откорректирован deletePlane&#10;откорректировано еще несколько объектов&#10;адрес объединен в socket" />
-    <option name="LAST_COMMIT_MESSAGE" value="откорректирован findPlane&#10;откорректирован deletePlane&#10;откорректировано еще несколько объектов&#10;адрес объединен в socket" />
+    <MESSAGE value="Избавились от Java 11" />
+    <option name="LAST_COMMIT_MESSAGE" value="Избавились от Java 11" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

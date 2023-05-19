@@ -12,6 +12,7 @@
         <header value="Spring-Boot-Lib" />
         <header value="Spring-Boot-Version" />
         <header value="Start-Class" />
+        <header value="encoding" />
       </option>
     </inspection_tool>
   </profile>
